@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="description" content="Cuaderno académico de Sdier Emanuel Roblez Roblez. Unidad 1: lógica combinacional, ejercicios y diagramas interactivos.">
+  <title>Cuaderno de síntesis · Sdier Emanuel Roblez Roblez | UNL</title>
+  <link rel="stylesheet" href="./css/estilos.css">
+  <script src="./js/graficos.js" defer></script>
+  <script src="./js/contenido.js" defer></script>
+  <script src="./js/app.js" defer></script>
+  <script src="./js/visor.js" defer></script>
+</head>
+<body>
+  <a class="salto-contenido" href="#contenido">Saltar al contenido</a>
+  <div class="barra-progreso" aria-hidden="true"><span id="barraProgreso"></span></div>
+  <div class="app-layout">
+    <aside id="sidebar" class="sidebar" aria-label="Navegación del cuaderno">
+      <div class="marca">
+        <img class="marca-unl" id="logoLateral" alt="Logotipo UNL">
+        <div><strong>CUADERNO DIGITAL</strong><small>Diseño de Circuitos · U1</small></div>
+        <button type="button" id="cerrarMenu" class="icon-btn cerrar-menu" aria-label="Cerrar menú">✕</button>
+      </div>
+      <div class="side-label">EXPLORAR</div>
+      <nav id="navegacionLateral" class="nav-lateral" aria-label="Índice lateral"></nav>
+      <div class="side-footer"><span class="punto-verde"></span> Material de semanas 1–4 <br><small>Semana 5 pendiente</small></div>
+    </aside>
+    <div id="oscurecedor" class="oscurecedor" hidden></div>
+    <div class="workspace">
+      <header class="topbar">
+        <button id="abrirMenu" class="icon-btn" type="button" aria-label="Abrir menú" aria-controls="sidebar" aria-expanded="false">☰</button>
+        <a class="home-link" href="#portada" title="Ir al inicio">◈ <span>Unidad 1</span></a>
+        <span class="top-divider" aria-hidden="true"></span>
+        <span id="seccionActual" class="ubicacion-actual">Portada</span>
+        <div class="top-actions">
+          <a class="btn btn-secondary btn-indice" href="#indice" title="Volver al índice general">☷ Índice</a>
+          <button id="botonBuscar" class="btn btn-secondary btn-buscar" type="button" title="Buscar contenido (Ctrl + K)">⌕ <span>Buscar temas</span><kbd>Ctrl K</kbd></button>
+          <button id="botonImprimir" class="btn btn-primary" type="button">⎙ <span>Imprimir</span></button>
+        </div>
+      </header>
+      <main id="contenido" tabindex="-1">
+        <div id="contenidoDinamico"><p class="cargando">Preparando el cuaderno…</p></div>
+      </main>
+      <footer class="footer-main">
+        <span>Universidad Nacional de Loja · Sdier Emanuel Roblez Roblez · Unidad 1</span>
+        <a href="#indice">Volver al índice ↑</a>
+      </footer>
+      <div class="nav-inferior" aria-label="Navegación por apartados">
+        <button type="button" id="anterior" class="btn btn-secondary">← Anterior</button>
+        <div class="nav-centro"><small>APARTADO ACTUAL</small><strong id="tituloInferior">Portada</strong></div>
+        <button type="button" id="siguiente" class="btn btn-primary">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+  <dialog id="dialogBuscar" class="dialog-busqueda" aria-label="Buscar temas">
+    <form method="dialog" class="dialog-titulo"><strong>Buscar en el cuaderno</strong><button class="icon-btn" aria-label="Cerrar búsqueda">✕</button></form>
+    <label class="sr-only" for="buscarInput">Palabra o tema</label>
+    <input id="buscarInput" type="search" placeholder="Ej.: Karnaugh, semisumador, SOP…" autocomplete="off">
+    <div id="buscarResultados" class="buscar-resultados" role="status" aria-live="polite"></div>
+    <small class="dialog-ayuda">Selecciona un resultado o presiona Esc para cerrar.</small>
+  </dialog>
+  <noscript><div class="sin-js">Este cuaderno necesita JavaScript activado para mostrar las lecciones, el índice y el registro de dudas.</div></noscript>
+</body>
+</html>
