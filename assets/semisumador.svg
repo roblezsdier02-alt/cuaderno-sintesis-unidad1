@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+
+  <rect width="1200" height="620" rx="28" fill="#f8faf9"/>
+
+  <text x="60" y="70" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Semisumador · Half Adder
+  </text>
+
+  <text x="60" y="105" font-family="Arial" font-size="18" fill="#64748b">
+    Suma dos bits y produce una suma S y un acarreo C.
+  </text>
+
+  <g font-family="Arial">
+
+    <text x="90" y="250" font-size="27" font-weight="700" fill="#123c33">A</text>
+    <text x="90" y="395" font-size="27" font-weight="700" fill="#123c33">B</text>
+
+    <circle cx="135" cy="240" r="7" fill="#e6a51c"/>
+    <circle cx="135" cy="385" r="7" fill="#e6a51c"/>
+
+    <!-- wires to xor -->
+    <path d="M135 240 H245 V200 H360" fill="none" stroke="#173b35" stroke-width="4"/>
+    <path d="M135 385 H245 V250 H360" fill="none" stroke="#173b35" stroke-width="4"/>
+
+    <!-- wires to and -->
+    <path d="M135 240 H205 V360 H360" fill="none" stroke="#173b35" stroke-width="4"/>
+    <path d="M135 385 H360" fill="none" stroke="#173b35" stroke-width="4"/>
+
+    <!-- XOR block -->
+    <rect x="360" y="165" width="180" height="120" rx="20" fill="#123c33"/>
+    <text x="450" y="215" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">
+      XOR
+    </text>
+    <text x="450" y="255" text-anchor="middle" font-size="22" fill="#f5c542">
+      A ⊕ B
+    </text>
+
+    <!-- AND block -->
+    <rect x="360" y="335" width="180" height="120" rx="20" fill="#123c33"/>
+    <text x="450" y="385" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">
+      AND
+    </text>
+    <text x="450" y="425" text-anchor="middle" font-size="22" fill="#f5c542">
+      A · B
+    </text>
+
+    <!-- outputs -->
+    <line x1="540" y1="225" x2="650" y2="225" stroke="#173b35" stroke-width="4"/>
+    <line x1="540" y1="395" x2="650" y2="395" stroke="#173b35" stroke-width="4"/>
+
+    <circle cx="660" cy="225" r="8" fill="#16a36d"/>
+    <circle cx="660" cy="395" r="8" fill="#16a36d"/>
+
+    <text x="690" y="235" font-size="30" font-weight="700" fill="#123c33">
+      S = A ⊕ B
+    </text>
+
+    <text x="690" y="405" font-size="30" font-weight="700" fill="#123c33">
+      C = A · B
+    </text>
+
+    <!-- Table -->
+    <rect x="815" y="150" width="300" height="330" rx="20" fill="#ffffff" stroke="#d6e1de"/>
+
+    <text x="965" y="195" text-anchor="middle" font-size="22" font-weight="700" fill="#123c33">
+      Tabla de verdad
+    </text>
+
+    <text x="855" y="245" font-size="18" font-weight="700">A</text>
+    <text x="920" y="245" font-size="18" font-weight="700">B</text>
+    <text x="985" y="245" font-size="18" font-weight="700">C</text>
+    <text x="1050" y="245" font-size="18" font-weight="700">S</text>
+
+    <g font-size="18" fill="#475569">
+      <text x="855" y="290">0</text><text x="920" y="290">0</text><text x="985" y="290">0</text><text x="1050" y="290">0</text>
+      <text x="855" y="335">0</text><text x="920" y="335">1</text><text x="985" y="335">0</text><text x="1050" y="335">1</text>
+      <text x="855" y="380">1</text><text x="920" y="380">0</text><text x="985" y="380">0</text><text x="1050" y="380">1</text>
+      <text x="855" y="425">1</text><text x="920" y="425">1</text><text x="985" y="425">1</text><text x="1050" y="425">0</text>
+    </g>
+
+    <text x="60" y="555" font-size="20" fill="#64748b">
+      “Semi” porque no puede recibir el acarreo de una etapa anterior.
+    </text>
+  </g>
+</svg>
