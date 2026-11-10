@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700">
+  <rect width="1200" height="700" rx="28" fill="#f7faf9"/>
+
+  <text x="60" y="70" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Sistemas numéricos y códigos digitales
+  </text>
+
+  <text x="60" y="105" font-family="Arial" font-size="18" fill="#64748b">
+    Un mismo dato puede representarse utilizando diferentes sistemas.
+  </text>
+
+  <g font-family="Arial">
+    <rect x="60" y="150" width="250" height="175" rx="18" fill="#ffffff" stroke="#d8e3df"/>
+    <text x="85" y="190" font-size="23" font-weight="700" fill="#123c33">Decimal</text>
+    <text x="85" y="225" font-size="17" fill="#64748b">Base 10</text>
+    <text x="85" y="270" font-size="35" font-weight="800" fill="#d99a00">45₁₀</text>
+    <text x="85" y="302" font-size="15" fill="#64748b">Símbolos: 0–9</text>
+
+    <rect x="330" y="150" width="250" height="175" rx="18" fill="#ffffff" stroke="#d8e3df"/>
+    <text x="355" y="190" font-size="23" font-weight="700" fill="#123c33">Binario</text>
+    <text x="355" y="225" font-size="17" fill="#64748b">Base 2</text>
+    <text x="355" y="270" font-size="35" font-weight="800" fill="#0f766e">101101₂</text>
+    <text x="355" y="302" font-size="15" fill="#64748b">Símbolos: 0 y 1</text>
+
+    <rect x="600" y="150" width="250" height="175" rx="18" fill="#ffffff" stroke="#d8e3df"/>
+    <text x="625" y="190" font-size="23" font-weight="700" fill="#123c33">Octal</text>
+    <text x="625" y="225" font-size="17" fill="#64748b">Base 8</text>
+    <text x="625" y="270" font-size="35" font-weight="800" fill="#0f766e">55₈</text>
+    <text x="625" y="302" font-size="15" fill="#64748b">3 bits por dígito</text>
+
+    <rect x="870" y="150" width="250" height="175" rx="18" fill="#ffffff" stroke="#d8e3df"/>
+    <text x="895" y="190" font-size="23" font-weight="700" fill="#123c33">Hexadecimal</text>
+    <text x="895" y="225" font-size="17" fill="#64748b">Base 16</text>
+    <text x="895" y="270" font-size="35" font-weight="800" fill="#0f766e">2D₁₆</text>
+    <text x="895" y="302" font-size="15" fill="#64748b">4 bits por dígito</text>
+
+    <text x="60" y="385" font-size="27" font-weight="800" fill="#123c33">
+      Códigos digitales
+    </text>
+
+    <rect x="60" y="420" width="330" height="190" rx="18" fill="#123c33"/>
+    <text x="90" y="465" font-size="24" font-weight="700" fill="#ffffff">BCD</text>
+    <text x="90" y="502" font-size="17" fill="#cfe8df">Cada dígito decimal usa 4 bits.</text>
+    <text x="90" y="548" font-size="28" font-weight="700" fill="#f5c542">57</text>
+    <text x="145" y="548" font-size="28" fill="#ffffff">→ 0101 0111</text>
+    <text x="90" y="582" font-size="15" fill="#9fc6b7">1010–1111 no son dígitos BCD.</text>
+
+    <rect x="435" y="420" width="330" height="190" rx="18" fill="#123c33"/>
+    <text x="465" y="465" font-size="24" font-weight="700" fill="#ffffff">Código Gray</text>
+    <text x="465" y="502" font-size="17" fill="#cfe8df">Entre vecinos cambia un solo bit.</text>
+    <text x="465" y="548" font-size="27" font-weight="700" fill="#f5c542">00 → 01 → 11 → 10</text>
+    <text x="465" y="582" font-size="15" fill="#9fc6b7">Usado también en mapas de Karnaugh.</text>
+
+    <rect x="810" y="420" width="310" height="190" rx="18" fill="#123c33"/>
+    <text x="840" y="465" font-size="24" font-weight="700" fill="#ffffff">ASCII</text>
+    <text x="840" y="502" font-size="17" fill="#cfe8df">Caracteres representados por números.</text>
+    <text x="840" y="548" font-size="29" font-weight="700" fill="#f5c542">A = 65</text>
+    <text x="840" y="582" font-size="15" fill="#9fc6b7">Texto → código numérico.</text>
+
+    <text x="60" y="660" font-size="17" fill="#64748b">
+      45₁₀ = 101101₂ = 55₈ = 2D₁₆
+    </text>
+  </g>
+</svg>
