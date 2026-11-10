@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="650" viewBox="0 0 1200 650">
+
+  <rect width="1200" height="650" rx="28" fill="#f8faf9"/>
+
+  <text x="60" y="70" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Sumador completo · Full Adder
+  </text>
+
+  <text x="60" y="105" font-family="Arial" font-size="18" fill="#64748b">
+    Suma A, B y el acarreo de entrada Cin.
+  </text>
+
+  <g font-family="Arial">
+
+    <text x="70" y="205" font-size="24" font-weight="700" fill="#123c33">A</text>
+    <text x="70" y="275" font-size="24" font-weight="700" fill="#123c33">B</text>
+    <text x="70" y="420" font-size="24" font-weight="700" fill="#123c33">Cin</text>
+
+    <line x1="110" y1="195" x2="245" y2="195" stroke="#173b35" stroke-width="4"/>
+    <line x1="110" y1="265" x2="245" y2="265" stroke="#173b35" stroke-width="4"/>
+
+    <rect x="245" y="150" width="190" height="160" rx="20" fill="#123c33"/>
+    <text x="340" y="215" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">
+      HA 1
+    </text>
+    <text x="340" y="255" text-anchor="middle" font-size="18" fill="#f5c542">
+      Semisumador
+    </text>
+
+    <line x1="435" y1="205" x2="535" y2="205" stroke="#173b35" stroke-width="4"/>
+
+    <line x1="110" y1="410" x2="535" y2="410" stroke="#173b35" stroke-width="4"/>
+
+    <rect x="535" y="160" width="190" height="290" rx="20" fill="#123c33"/>
+    <text x="630" y="260" text-anchor="middle" font-size="26" font-weight="700" fill="#ffffff">
+      HA 2
+    </text>
+    <text x="630" y="300" text-anchor="middle" font-size="18" fill="#f5c542">
+      + Cin
+    </text>
+
+    <line x1="725" y1="230" x2="820" y2="230" stroke="#173b35" stroke-width="4"/>
+    <text x="850" y="240" font-size="30" font-weight="700" fill="#123c33">
+      S
+    </text>
+
+    <!-- carry paths -->
+    <path d="M435 265 H465 V520 H815" fill="none" stroke="#16a36d" stroke-width="4"/>
+    <path d="M725 380 H770 V520 H815" fill="none" stroke="#16a36d" stroke-width="4"/>
+
+    <rect x="815" y="470" width="145" height="100" rx="18" fill="#e6a51c"/>
+    <text x="888" y="532" text-anchor="middle" font-size="27" font-weight="700" fill="#ffffff">
+      OR
+    </text>
+
+    <line x1="960" y1="520" x2="1040" y2="520" stroke="#173b35" stroke-width="4"/>
+
+    <text x="1060" y="530" font-size="28" font-weight="700" fill="#123c33">
+      Cout
+    </text>
+
+    <rect x="800" y="135" width="330" height="245" rx="22" fill="#ffffff" stroke="#d6e1de"/>
+
+    <text x="830" y="185" font-size="21" font-weight="700" fill="#123c33">
+      Ecuaciones
+    </text>
+
+    <text x="830" y="240" font-size="28" font-weight="700" fill="#0f766e">
+      S = A ⊕ B ⊕ Cin
+    </text>
+
+    <text x="830" y="295" font-size="23" font-weight="700" fill="#0f766e">
+      Cout = AB + ACin + BCin
+    </text>
+
+    <text x="830" y="345" font-size="17" fill="#64748b">
+      S = cantidad impar de unos
+    </text>
+
+    <text x="830" y="370" font-size="17" fill="#64748b">
+      Cout = al menos dos unos
+    </text>
+
+    <text x="60" y="605" font-size="19" fill="#64748b">
+      Un sumador completo puede construirse con dos semisumadores y una compuerta OR.
+    </text>
+
+  </g>
+</svg>
