@@ -23,6 +23,10 @@
 **Docente:** Ing. Luis Darío Sinche Cueva, Mg.  
 **Período académico:** Septiembre 2026 – Marzo 2027
 
+<p align="center">
+  <img src="./assets/portada-circuitos.svg" width="100%" alt="Portada Diseño de Circuitos">
+</p>
+
 ---
 
 > **Cuaderno académico digital de consulta, estudio y síntesis de la Unidad 1**
