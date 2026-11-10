@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1250" height="660" viewBox="0 0 1250 660">
+
+  <rect width="1250" height="660" rx="28" fill="#f8faf9"/>
+
+  <text x="55" y="70" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Sumador / Restador de 4 bits
+  </text>
+
+  <text x="55" y="105" font-family="Arial" font-size="18" fill="#64748b">
+    La señal M selecciona entre suma y resta mediante complemento a dos.
+  </text>
+
+  <g font-family="Arial">
+
+    <!-- A -->
+    <rect x="70" y="190" width="150" height="90" rx="18" fill="#123c33"/>
+    <text x="145" y="225" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">
+      A3...A0
+    </text>
+    <text x="145" y="255" text-anchor="middle" font-size="16" fill="#cfe8df">
+      Operando A
+    </text>
+
+    <!-- B -->
+    <rect x="70" y="350" width="150" height="90" rx="18" fill="#123c33"/>
+    <text x="145" y="385" text-anchor="middle" font-size="24" font-weight="700" fill="#ffffff">
+      B3...B0
+    </text>
+    <text x="145" y="415" text-anchor="middle" font-size="16" fill="#cfe8df">
+      Operando B
+    </text>
+
+    <!-- M -->
+    <circle cx="145" cy="535" r="38" fill="#e6a51c"/>
+    <text x="145" y="544" text-anchor="middle" font-size="28" font-weight="700" fill="#ffffff">
+      M
+    </text>
+
+    <!-- XOR block -->
+    <rect x="315" y="330" width="210" height="125" rx="20" fill="#0f766e"/>
+    <text x="420" y="375" text-anchor="middle" font-size="25" font-weight="700" fill="#ffffff">
+      XOR × 4
+    </text>
+    <text x="420" y="415" text-anchor="middle" font-size="19" fill="#d6fff2">
+      Bi ⊕ M
+    </text>
+
+    <!-- Wires -->
+    <line x1="220" y1="235" x2="625" y2="235" stroke="#173b35" stroke-width="4"/>
+    <line x1="220" y1="395" x2="315" y2="395" stroke="#173b35" stroke-width="4"/>
+    <line x1="525" y1="395" x2="625" y2="395" stroke="#173b35" stroke-width="4"/>
+
+    <path d="M145 497 V475 H420 V455" fill="none" stroke="#e6a51c" stroke-width="4"/>
+
+    <!-- adder -->
+    <rect x="625" y="175" width="300" height="315" rx="28" fill="#123c33"/>
+
+    <text x="775" y="240" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">
+      SUMADOR
+    </text>
+
+    <text x="775" y="280" text-anchor="middle" font-size="24" fill="#f5c542">
+      4 bits
+    </text>
+
+    <line x1="655" y1="315" x2="895" y2="315" stroke="#54746c"/>
+
+    <text x="775" y="365" text-anchor="middle" font-size="20" fill="#d6eee7">
+      M = 0 → A + B
+    </text>
+
+    <text x="775" y="405" text-anchor="middle" font-size="20" fill="#d6eee7">
+      M = 1 → A + B' + 1
+    </text>
+
+    <text x="775" y="452" text-anchor="middle" font-size="18" fill="#ffffff">
+      Cin₀ = M
+    </text>
+
+    <!-- M to cin -->
+    <path d="M145 535 H590 V470 H625" fill="none" stroke="#e6a51c" stroke-width="4"/>
+
+    <!-- Result -->
+    <line x1="925" y1="270" x2="1030" y2="270" stroke="#173b35" stroke-width="4"/>
+
+    <rect x="1030" y="220" width="160" height="100" rx="18" fill="#0f766e"/>
+
+    <text x="1110" y="260" text-anchor="middle" font-size="23" font-weight="700" fill="#ffffff">
+      S3...S0
+    </text>
+
+    <text x="1110" y="292" text-anchor="middle" font-size="16" fill="#d6fff2">
+      Resultado
+    </text>
+
+    <!-- Overflow -->
+    <line x1="925" y1="420" x2="1015" y2="420" stroke="#173b35" stroke-width="4"/>
+
+    <rect x="1015" y="370" width="175" height="105" rx="18" fill="#ffffff" stroke="#d6e1de"/>
+
+    <text x="1102" y="410" text-anchor="middle" font-size="19" font-weight="700" fill="#123c33">
+      OVERFLOW
+    </text>
+
+    <text x="1102" y="447" text-anchor="middle" font-size="23" font-weight="700" fill="#d97706">
+      V = C3 ⊕ C4
+    </text>
+
+    <!-- explanation -->
+    <rect x="300" y="520" width="890" height="95" rx="20" fill="#e8f4ef"/>
+
+    <text x="340" y="558" font-size="18" fill="#123c33">
+      XOR permite seleccionar:
+    </text>
+
+    <text x="340" y="590" font-size="18" font-weight="700" fill="#0f766e">
+      B ⊕ 0 = B
+    </text>
+
+    <text x="510" y="590" font-size="18" font-weight="700" fill="#0f766e">
+      B ⊕ 1 = B'
+    </text>
+
+    <text x="720" y="590" font-size="18" fill="#123c33">
+      M=1 también agrega el +1 del complemento a dos.
+    </text>
+
+  </g>
+</svg>
