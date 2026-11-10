@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820">
+
+  <defs>
+    <style>
+      .title { font-family: Arial; font-weight: 800; fill: #123c33; }
+      .label { font-family: Arial; font-weight: 700; fill: #123c33; }
+      .eq { font-family: Arial; fill: #64748b; }
+      .gate { fill: none; stroke: #132b29; stroke-width: 4; }
+      .wire { stroke: #132b29; stroke-width: 4; }
+      .card { fill: #ffffff; stroke: #dce5e2; stroke-width: 2; }
+    </style>
+  </defs>
+
+  <rect width="1400" height="820" rx="28" fill="#f7faf9"/>
+
+  <text x="55" y="65" class="title" font-size="38">
+    Las siete compuertas lógicas
+  </text>
+
+  <!-- NOT -->
+  <g transform="translate(55 115)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">NOT</text>
+    <line x1="45" y1="100" x2="95" y2="100" class="wire"/>
+    <polygon points="95,65 95,135 170,100" class="gate"/>
+    <circle cx="181" cy="100" r="10" class="gate"/>
+    <line x1="191" y1="100" x2="245" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = A'</text>
+  </g>
+
+  <!-- AND -->
+  <g transform="translate(385 115)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">AND</text>
+    <line x1="40" y1="80" x2="90" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="90" y2="120" class="wire"/>
+    <path d="M90 60 L145 60 Q215 60 215 100 Q215 140 145 140 L90 140 Z" class="gate"/>
+    <line x1="215" y1="100" x2="260" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = A·B</text>
+  </g>
+
+  <!-- OR -->
+  <g transform="translate(715 115)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">OR</text>
+    <line x1="40" y1="80" x2="100" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="100" y2="120" class="wire"/>
+    <path d="M95 60 Q135 100 95 140 Q175 145 225 100 Q175 55 95 60 Z" class="gate"/>
+    <path d="M95 60 Q130 100 95 140" class="gate"/>
+    <line x1="225" y1="100" x2="260" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = A+B</text>
+  </g>
+
+  <!-- NAND -->
+  <g transform="translate(1045 115)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">NAND</text>
+    <line x1="40" y1="80" x2="90" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="90" y2="120" class="wire"/>
+    <path d="M90 60 L145 60 Q205 60 205 100 Q205 140 145 140 L90 140 Z" class="gate"/>
+    <circle cx="216" cy="100" r="10" class="gate"/>
+    <line x1="226" y1="100" x2="260" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = (A·B)'</text>
+  </g>
+
+  <!-- NOR -->
+  <g transform="translate(215 350)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">NOR</text>
+    <line x1="40" y1="80" x2="100" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="100" y2="120" class="wire"/>
+    <path d="M95 60 Q135 100 95 140 Q170 145 215 100 Q170 55 95 60 Z" class="gate"/>
+    <path d="M95 60 Q130 100 95 140" class="gate"/>
+    <circle cx="226" cy="100" r="10" class="gate"/>
+    <line x1="236" y1="100" x2="265" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = (A+B)'</text>
+  </g>
+
+  <!-- XOR -->
+  <g transform="translate(550 350)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">XOR</text>
+    <line x1="40" y1="80" x2="105" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="105" y2="120" class="wire"/>
+    <path d="M100 60 Q140 100 100 140 Q175 145 220 100 Q175 55 100 60 Z" class="gate"/>
+    <path d="M100 60 Q135 100 100 140" class="gate"/>
+    <path d="M88 60 Q123 100 88 140" class="gate"/>
+    <line x1="220" y1="100" x2="260" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = A⊕B</text>
+  </g>
+
+  <!-- XNOR -->
+  <g transform="translate(885 350)">
+    <rect class="card" width="300" height="185" rx="18"/>
+    <text x="25" y="40" class="label" font-size="23">XNOR</text>
+    <line x1="40" y1="80" x2="105" y2="80" class="wire"/>
+    <line x1="40" y1="120" x2="105" y2="120" class="wire"/>
+    <path d="M100 60 Q140 100 100 140 Q170 145 210 100 Q170 55 100 60 Z" class="gate"/>
+    <path d="M100 60 Q135 100 100 140" class="gate"/>
+    <path d="M88 60 Q123 100 88 140" class="gate"/>
+    <circle cx="221" cy="100" r="10" class="gate"/>
+    <line x1="231" y1="100" x2="265" y2="100" class="wire"/>
+    <text x="25" y="160" class="eq" font-size="18">Y = (A⊕B)'</text>
+  </g>
+
+  <rect x="185" y="595" width="1030" height="150" rx="20" fill="#123c33"/>
+
+  <text x="225" y="640" font-family="Arial" font-size="22" font-weight="700" fill="#ffffff">
+    Forma rápida de recordarlas
+  </text>
+
+  <text x="225" y="682" font-family="Arial" font-size="18" fill="#d7eee6">
+    AND = todas · OR = al menos una · XOR = diferentes · XNOR = iguales
+  </text>
+
+  <text x="225" y="716" font-family="Arial" font-size="18" fill="#f5c542">
+    NAND y NOR son universales: con cualquiera de ellas puede construirse cualquier función lógica.
+  </text>
+</svg>
