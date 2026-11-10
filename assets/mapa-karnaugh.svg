@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="720" viewBox="0 0 1200 720">
+
+  <rect width="1200" height="720" rx="28" fill="#f8faf9"/>
+
+  <text x="55" y="65" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Mapa de Karnaugh de 4 variables
+  </text>
+
+  <text x="55" y="102" font-family="Arial" font-size="18" fill="#64748b">
+    AB \ CD · orden Gray: 00 · 01 · 11 · 10
+  </text>
+
+  <g font-family="Arial">
+
+    <text x="176" y="165" font-size="19" font-weight="700" fill="#123c33">00</text>
+    <text x="286" y="165" font-size="19" font-weight="700" fill="#123c33">01</text>
+    <text x="396" y="165" font-size="19" font-weight="700" fill="#123c33">11</text>
+    <text x="506" y="165" font-size="19" font-weight="700" fill="#123c33">10</text>
+
+    <text x="85" y="235" font-size="19" font-weight="700" fill="#123c33">00</text>
+    <text x="85" y="345" font-size="19" font-weight="700" fill="#123c33">01</text>
+    <text x="85" y="455" font-size="19" font-weight="700" fill="#123c33">11</text>
+    <text x="85" y="565" font-size="19" font-weight="700" fill="#123c33">10</text>
+
+    <text x="65" y="155" font-size="16" fill="#64748b">AB \ CD</text>
+
+    <g transform="translate(140 180)">
+      <rect width="440" height="440" fill="#ffffff" stroke="#91a39d" stroke-width="2"/>
+
+      <path d="M110 0 V440 M220 0 V440 M330 0 V440"
+            stroke="#c6d1ce" stroke-width="2"/>
+
+      <path d="M0 110 H440 M0 220 H440 M0 330 H440"
+            stroke="#c6d1ce" stroke-width="2"/>
+
+      <!-- Values -->
+      <g font-family="Arial" font-size="33" font-weight="700" text-anchor="middle" fill="#374151">
+        <text x="55" y="70">1</text>
+        <text x="165" y="70">0</text>
+        <text x="275" y="70">0</text>
+        <text x="385" y="70">1</text>
+
+        <text x="55" y="180">0</text>
+        <text x="165" y="180">1</text>
+        <text x="275" y="180">1</text>
+        <text x="385" y="180">0</text>
+
+        <text x="55" y="290">0</text>
+        <text x="165" y="290">1</text>
+        <text x="275" y="290">1</text>
+        <text x="385" y="290">0</text>
+
+        <text x="55" y="400">1</text>
+        <text x="165" y="400">0</text>
+        <text x="275" y="400">0</text>
+        <text x="385" y="400">1</text>
+      </g>
+
+      <!-- Corner groups -->
+      <rect x="8" y="8" width="94" height="94" rx="15"
+            fill="#d9f3e8" fill-opacity=".8" stroke="#16a36d" stroke-width="4"/>
+
+      <rect x="338" y="8" width="94" height="94" rx="15"
+            fill="#d9f3e8" fill-opacity=".8" stroke="#16a36d" stroke-width="4"/>
+
+      <rect x="8" y="338" width="94" height="94" rx="15"
+            fill="#d9f3e8" fill-opacity=".8" stroke="#16a36d" stroke-width="4"/>
+
+      <rect x="338" y="338" width="94" height="94" rx="15"
+            fill="#d9f3e8" fill-opacity=".8" stroke="#16a36d" stroke-width="4"/>
+
+      <!-- Central group -->
+      <rect x="118" y="118" width="204" height="204" rx="18"
+            fill="#f9df9b" fill-opacity=".55" stroke="#e6a51c" stroke-width="4"/>
+    </g>
+
+    <rect x="660" y="180" width="455" height="440" rx="24" fill="#123c33"/>
+
+    <text x="705" y="235" font-size="27" font-weight="700" fill="#ffffff">
+      Lectura de los grupos
+    </text>
+
+    <circle cx="720" cy="300" r="16" fill="#d9f3e8" stroke="#16a36d" stroke-width="3"/>
+    <text x="755" y="308" font-size="21" fill="#ffffff">
+      Las cuatro esquinas
+    </text>
+
+    <text x="755" y="345" font-size="28" font-weight="700" fill="#76e1b6">
+      B'D'
+    </text>
+
+    <circle cx="720" cy="415" r="16" fill="#f9df9b" stroke="#e6a51c" stroke-width="3"/>
+    <text x="755" y="423" font-size="21" fill="#ffffff">
+      Bloque central
+    </text>
+
+    <text x="755" y="460" font-size="28" font-weight="700" fill="#f5c542">
+      BD
+    </text>
+
+    <line x1="705" y1="500" x2="1070" y2="500" stroke="#52746a"/>
+
+    <text x="705" y="545" font-size="21" fill="#d7eee6">
+      Función simplificada:
+    </text>
+
+    <text x="705" y="590" font-size="34" font-weight="700" fill="#ffffff">
+      F = B'D' + BD
+    </text>
+  </g>
+</svg>
