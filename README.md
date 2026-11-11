@@ -1,3 +1,4 @@
+````markdown
 <div align="center">
 
 <img src="./assets/logo-unl.png" alt="Universidad Nacional de Loja" width="210">
@@ -23,6 +24,8 @@
 **Docente:** Ing. Luis Darío Sinche Cueva, Mg.  
 **Período académico:** Septiembre 2026 – Marzo 2027
 
+<br>
+
 <p align="center">
   <img src="./assets/portada-circuitos.svg" width="100%" alt="Portada Diseño de Circuitos">
 </p>
@@ -39,139 +42,204 @@
 
 # 📑 Índice general
 
-Este cuaderno organiza los principales conocimientos desarrollados durante la
-**Unidad 1 de Diseño de Circuitos**.
+Este cuaderno digital reúne y organiza los principales conocimientos
+desarrollados durante la **Unidad 1 de Diseño de Circuitos**.
 
-El contenido está dividido por semanas para facilitar la consulta y permitir
-una navegación progresiva entre los temas.
-
-| Semana | Tema principal | Contenidos | Acceso |
-|:---:|---|---|:---:|
-| 🟢 **1** | Sistemas digitales | Binario, octal, hexadecimal, códigos y compuertas | [**Abrir →**](semana-1/README.md) |
-| 🔵 **2** | Álgebra de Boole | Tabla de verdad, leyes, SOP, POS y simplificación | [**Abrir →**](semana-2/README.md) |
-| 🟠 **3** | Mapas de Karnaugh | Agrupaciones, indiferentes, NAND y NOR | [**Abrir →**](semana-3/README.md) |
-| 🔴 **4** | Circuitos aritméticos | Semisumador, sumador completo, resta y overflow | [**Abrir →**](semana-4/README.md) |
+El contenido se encuentra estructurado por semanas y complementado con un
+**resumen general** y una sección de **ejemplos resueltos paso a paso**.
 
 ---
 
-# 🎯 Propósito de la Unidad
+## 📚 Contenido por semanas
 
-La Unidad 1 introduce el proceso de **diseño clásico de circuitos
-combinacionales**.
+| Semana | Tema principal | Contenidos | Acceso |
+|:---:|---|---|:---:|
+| 🟢 **Semana 1** | Sistemas digitales | Sistemas numéricos, códigos y compuertas lógicas | [**Abrir →**](semana-1/README.md) |
+| 🔵 **Semana 2** | Álgebra de Boole | Tablas de verdad, leyes, SOP, POS y simplificación | [**Abrir →**](semana-2/README.md) |
+| 🟠 **Semana 3** | Mapas de Karnaugh | Agrupaciones, condiciones indiferentes, NAND y NOR | [**Abrir →**](semana-3/README.md) |
+| 🔴 **Semana 4** | Circuitos aritméticos | Semisumador, sumador completo, suma, resta y overflow | [**Abrir →**](semana-4/README.md) |
 
-La finalidad no es únicamente aprender símbolos o fórmulas, sino desarrollar
-un procedimiento para transformar una necesidad real en un circuito lógico.
+---
+
+## 📖 Material complementario
+
+| Sección | Contenido | Acceso |
+|---|---|:---:|
+| 📚 **Resumen de la Unidad** | Síntesis de las cuatro semanas, fórmulas y conceptos fundamentales | [**Abrir →**](resumen-unidad/README.md) |
+| 🧩 **Ejemplos resueltos** | Ejercicios explicados paso a paso por cada semana | [**Abrir →**](ejemplos-resueltos/README.md) |
+
+---
+
+# 🎯 Propósito del cuaderno
+
+El propósito de este cuaderno es sintetizar de manera clara, ordenada y visual
+los conocimientos desarrollados durante la **Unidad 1: Análisis de lógica
+combinacional con diseño clásico**.
+
+No se busca únicamente memorizar fórmulas o tablas.
+
+La finalidad es comprender el proceso mediante el cual un problema puede
+transformarse en un circuito digital funcional.
 
 ```mermaid
 flowchart LR
-    A["📝 Problema"] --> B["🔤 Variables"]
+
+    A["📝 Problema"]
+    --> B["🔤 Variables"]
+
     B --> C["📊 Tabla de verdad"]
-    C --> D["🧮 Función booleana"]
+
+    C --> D["🧮 Función lógica"]
+
     D --> E["✂️ Simplificación"]
-    E --> F["⚡ Circuito lógico"]
+
+    E --> F["⚡ Circuito"]
+
     F --> G["💻 Verificación"]
 ```
 
 ---
 
-# 🧠 ¿Qué es un circuito combinacional?
+# 🧠 ¿Qué es la lógica combinacional?
 
-Un **circuito combinacional** es aquel cuya salida depende exclusivamente de
-los valores que poseen sus entradas en ese instante.
+La lógica combinacional estudia circuitos cuya salida depende exclusivamente
+de los valores presentes en las entradas en un determinado instante.
 
-No necesita recordar lo ocurrido anteriormente.
+Esto significa que:
 
-Por ejemplo:
+```text
+SALIDA = función de las ENTRADAS ACTUALES
+```
+
+El circuito no necesita recordar estados anteriores.
+
+---
+
+## Ejemplo
+
+Supongamos:
+
+```text
+Y = A·B
+```
+
+Si:
 
 ```text
 A = 1
 B = 1
+```
 
-Y = A · B
+entonces:
 
+```text
 Y = 1
 ```
 
-Si una de las entradas cambia, el resultado puede cambiar inmediatamente.
+Pero si una entrada cambia:
 
-```mermaid
-flowchart LR
-    A["Entrada A"] --> G["Circuito combinacional"]
-    B["Entrada B"] --> G
-    C["Entrada C"] --> G
-    G --> Y["Salida Y"]
+```text
+A = 1
+B = 0
+```
+
+la salida será:
+
+```text
+Y = 0
 ```
 
 ---
 
-# 🔍 La misma función puede representarse de varias formas
+# 🔄 Diferentes formas de representar la misma función
 
-Una de las ideas fundamentales de la unidad es que el mismo comportamiento
-lógico puede expresarse mediante:
+Un mismo comportamiento lógico puede escribirse mediante:
 
 ```mermaid
 flowchart LR
-    A["📝 Enunciado"] --> B["📊 Tabla de verdad"]
+
+    A["📝 Enunciado"]
+    --> B["📊 Tabla de verdad"]
+
     B --> C["🧮 Expresión booleana"]
+
     C --> D["⚡ Circuito lógico"]
 ```
 
-Por ejemplo:
+Estas representaciones no describen sistemas distintos.
+
+Representan:
+
+```text
+LA MISMA FUNCIÓN
+```
+
+de diferentes maneras.
+
+---
+
+## Ejemplo
+
+La expresión:
 
 ```text
 Y = A·B + C'
 ```
 
-puede interpretarse como:
+indica que:
 
-1. `A` y `B` entran en una compuerta AND.
+1. `A` y `B` pasan por una compuerta AND.
 2. `C` pasa por una compuerta NOT.
-3. Los dos resultados se conectan a una compuerta OR.
+3. Los resultados anteriores pasan por una OR.
 
 ---
 
-# 🗺️ Ruta de aprendizaje
+# 🗺️ Ruta de aprendizaje de la Unidad 1
 
 ```mermaid
 flowchart TD
 
-    S1["🟢 SEMANA 1<br/>Representación digital"]
-    S2["🔵 SEMANA 2<br/>Álgebra de Boole"]
-    S3["🟠 SEMANA 3<br/>Karnaugh"]
-    S4["🔴 SEMANA 4<br/>Circuitos aritméticos"]
+    S1["🟢 SEMANA 1<br/>Fundamentos digitales"]
 
-    S1 --> A["Binario · Octal · Hexadecimal"]
+    S1 --> A["Sistemas numéricos"]
     A --> B["BCD · Gray · ASCII"]
     B --> C["Compuertas lógicas"]
 
-    C --> S2
+    C --> S2["🔵 SEMANA 2<br/>Álgebra de Boole"]
+
     S2 --> D["Tabla de verdad"]
-    D --> E["SOP · POS"]
-    E --> F["Simplificación"]
+    D --> E["Minitérminos y maxitérminos"]
+    E --> F["SOP y POS"]
+    F --> G["Simplificación"]
 
-    F --> S3
-    S3 --> G["Agrupaciones"]
-    G --> H["Condiciones indiferentes"]
-    H --> I["NAND · NOR"]
+    G --> S3["🟠 SEMANA 3<br/>Mapas de Karnaugh"]
 
-    I --> S4
-    S4 --> J["Semisumador"]
-    J --> K["Sumador completo"]
-    K --> L["Sumador de 4 bits"]
-    L --> M["Suma · Resta · Overflow"]
+    S3 --> H["Código Gray"]
+    H --> I["Agrupaciones"]
+    I --> J["Condiciones indiferentes"]
+    J --> K["NAND / NOR"]
+
+    K --> S4["🔴 SEMANA 4<br/>Circuitos aritméticos"]
+
+    S4 --> L["Semisumador"]
+    L --> M["Sumador completo"]
+    M --> N["Sumador de 4 bits"]
+    N --> O["Suma / Resta"]
+    O --> P["Overflow y retardo"]
 ```
 
 ---
 
-# 📚 Contenido del cuaderno
+# 🟢 Semana 1
 
-## 🟢 Semana 1 · Fundamentos digitales
+## Sistemas numéricos, códigos y compuertas lógicas
 
-En la primera semana se estudia cómo representa información un sistema
-digital.
+La primera semana introduce los fundamentos necesarios para comprender la
+representación de información dentro de los sistemas digitales.
 
-### Temas
+### Contenidos principales
 
+- representación binaria;
 - estados lógicos `0` y `1`;
 - niveles de voltaje;
 - margen de ruido;
@@ -179,37 +247,43 @@ digital.
 - sistema binario;
 - sistema octal;
 - sistema hexadecimal;
+- conversiones entre bases;
 - complemento a dos;
 - código BCD;
 - código Gray;
 - código ASCII;
-- compuerta NOT;
-- compuerta AND;
-- compuerta OR;
-- compuerta NAND;
-- compuerta NOR;
-- compuerta XOR;
-- compuerta XNOR.
+- NOT;
+- AND;
+- OR;
+- NAND;
+- NOR;
+- XOR;
+- XNOR.
 
-### Acceso
+<p align="center">
+  <img src="./assets/sistemas-codigos.svg" width="90%" alt="Sistemas numéricos y códigos">
+</p>
 
-➡️ **[Estudiar Semana 1](semana-1/README.md)**
+### 📖 Acceso
+
+➡️ [**Estudiar Semana 1**](semana-1/README.md)
 
 ---
 
-## 🔵 Semana 2 · Álgebra de Boole
+# 🔵 Semana 2
 
-La segunda semana conecta los circuitos físicos con su representación
-matemática.
+## Álgebra de Boole y formas canónicas
 
-### Temas
+En la segunda semana se aprende a representar matemáticamente el
+comportamiento de un circuito.
+
+### Contenidos principales
 
 - variables booleanas;
 - expresiones lógicas;
 - tablas de verdad;
-- postulados;
-- teoremas;
-- dualidad;
+- leyes del álgebra de Boole;
+- principio de dualidad;
 - leyes de De Morgan;
 - minitérminos;
 - maxitérminos;
@@ -217,208 +291,476 @@ matemática.
 - POS;
 - formas canónicas;
 - simplificación algebraica;
-- costo de implementación.
+- costo de implementación;
+- procedimiento clásico de diseño.
 
-### Acceso
+<p align="center">
+  <img src="./assets/algebra-boole.svg" width="90%" alt="Álgebra de Boole">
+</p>
 
-➡️ **[Estudiar Semana 2](semana-2/README.md)**
+### 📖 Acceso
+
+➡️ [**Estudiar Semana 2**](semana-2/README.md)
 
 ---
 
-## 🟠 Semana 3 · Mapas de Karnaugh
+# 🟠 Semana 3
 
-La tercera semana introduce una herramienta gráfica para simplificar
+## Mapas de Karnaugh, condiciones indiferentes y NAND/NOR
+
+La tercera semana introduce una herramienta gráfica que permite simplificar
 funciones booleanas.
 
-### Temas
+### Contenidos principales
 
-- principio de adyacencia;
+- teorema de adyacencia;
 - código Gray;
-- mapas de 3 variables;
-- mapas de 4 variables;
-- agrupaciones;
+- mapas de tres variables;
+- mapas de cuatro variables;
+- grupos de `2ᵏ`;
 - implicantes;
 - implicantes primos;
+- implicantes primos esenciales;
 - SOP mínima;
 - POS mínima;
 - condiciones indiferentes;
-- NAND universal;
-- NOR universal;
-- implementación NAND-NAND;
-- implementación NOR-NOR.
+- compuertas universales;
+- NAND-NAND;
+- NOR-NOR;
+- costo lógico.
 
-### Acceso
+<p align="center">
+  <img src="./assets/mapa-karnaugh.svg" width="90%" alt="Mapa de Karnaugh">
+</p>
 
-➡️ **[Estudiar Semana 3](semana-3/README.md)**
+### 📖 Acceso
+
+➡️ [**Estudiar Semana 3**](semana-3/README.md)
 
 ---
 
-## 🔴 Semana 4 · Circuitos aritméticos
+# 🔴 Semana 4
+
+## Circuitos aritméticos
 
 La cuarta semana aplica los conocimientos anteriores a circuitos capaces de
 realizar operaciones matemáticas.
 
-### Temas
+### Contenidos principales
 
 - suma binaria;
 - acarreo;
 - semisumador;
 - sumador completo;
 - sumador de 4 bits;
-- propagación de acarreo;
-- resta mediante complemento a dos;
+- Ripple Carry;
+- retardo de propagación;
+- complemento a dos;
+- resta;
 - sumador/restador;
 - overflow;
-- retardo de propagación;
-- comparadores.
+- comparadores;
+- relación con la ALU.
 
-### Acceso
+<p align="center">
+  <img src="./assets/sumador-restador.svg" width="90%" alt="Sumador restador">
+</p>
 
-➡️ **[Estudiar Semana 4](semana-4/README.md)**
+### 📖 Acceso
+
+➡️ [**Estudiar Semana 4**](semana-4/README.md)
 
 ---
 
-# 🔗 Cómo se relaciona toda la Unidad
+# 📚 Resumen general de la Unidad
 
-Los temas no son independientes.
+Después de estudiar las cuatro semanas se dispone de una sección especial que
+reúne:
 
-Cada uno proporciona herramientas necesarias para comprender el siguiente.
+- conceptos esenciales;
+- fórmulas;
+- tablas;
+- reglas;
+- procedimientos;
+- errores frecuentes;
+- relaciones entre los temas;
+- checklist de aprendizaje.
 
-```mermaid
-flowchart LR
-    A["0 y 1"] --> B["Compuertas"]
-    B --> C["Álgebra de Boole"]
-    C --> D["Tabla de verdad"]
-    D --> E["SOP / POS"]
-    E --> F["Karnaugh"]
-    F --> G["Circuito mínimo"]
-    G --> H["Circuitos aritméticos"]
-```
+Esta sección permite consultar rápidamente toda la Unidad 1 sin tener que
+recorrer nuevamente cada capítulo completo.
+
+### 📖 Acceso
+
+➡️ [**Abrir Resumen de la Unidad 1**](resumen-unidad/README.md)
+
+---
+
+# 🧩 Ejemplos resueltos
+
+El cuaderno también contiene ejercicios desarrollados paso a paso.
+
+Los ejemplos incluyen:
+
+### Semana 1
+
+- binario a decimal;
+- decimal a binario;
+- complemento a dos;
+- identificación de compuertas.
+
+### Semana 2
+
+- evaluación de expresiones;
+- construcción de tablas;
+- alarma de tres sensores;
+- simplificación booleana;
+- SOP y POS.
+
+### Semana 3
+
+- agrupaciones de Karnaugh;
+- simplificación;
+- condiciones indiferentes.
+
+### Semana 4
+
+- suma binaria;
+- semisumador;
+- sumador completo;
+- resta mediante complemento a dos;
+- retardo;
+- comparación.
+
+Las soluciones pueden mantenerse ocultas mediante los elementos desplegables
+de GitHub para intentar primero cada ejercicio.
+
+### 📖 Acceso
+
+➡️ [**Abrir Ejemplos Resueltos**](ejemplos-resueltos/README.md)
 
 ---
 
 # ⚡ Procedimiento clásico de diseño
 
-Cuando se desea resolver un problema mediante lógica combinacional se puede
-seguir esta secuencia:
+Una de las ideas fundamentales desarrolladas durante toda la Unidad 1 es el
+procedimiento sistemático de diseño.
+
+<p align="center">
+  <img src="./assets/proceso-diseno.svg" width="100%" alt="Proceso clásico de diseño combinacional">
+</p>
+
+El proceso puede resumirse como:
 
 ### 1. Comprender el problema
 
-Determinar exactamente qué debe hacer el sistema.
+Determinar exactamente qué debe hacer el circuito.
 
-### 2. Definir las variables
+### 2. Definir variables
 
-Asignar una variable a cada entrada y a cada salida.
+Identificar:
+
+```text
+entradas
+```
+
+y:
+
+```text
+salidas
+```
 
 ### 3. Construir la tabla de verdad
 
-Representar todas las combinaciones posibles.
+Representar:
 
-### 4. Obtener la función
+```text
+todas las combinaciones posibles
+```
 
-Identificar los minitérminos o maxitérminos correspondientes.
+### 4. Obtener la función lógica
+
+Utilizando:
+
+```text
+SOP
+```
+
+o:
+
+```text
+POS
+```
 
 ### 5. Simplificar
 
-Utilizar:
+Mediante:
 
-- álgebra de Boole;
-- mapas de Karnaugh.
+```text
+Álgebra de Boole
+```
 
-### 6. Dibujar el circuito
+o:
 
-Transformar la función simplificada en compuertas.
+```text
+Mapas de Karnaugh
+```
+
+### 6. Implementar
+
+Transformar la expresión simplificada en:
+
+```text
+compuertas lógicas
+```
 
 ### 7. Verificar
 
-Comprobar que el circuito reproduce exactamente la tabla de verdad.
+Comprobar que el circuito reproduce correctamente la especificación inicial.
+
+---
+
+# 💻 Uso de Logisim-evolution
+
+Durante las actividades prácticas puede utilizarse **Logisim-evolution** para
+construir y verificar circuitos digitales.
+
+Permite trabajar con:
+
+- entradas;
+- salidas;
+- LED;
+- sondas;
+- compuertas;
+- subcircuitos;
+- componentes TTL;
+- conexiones;
+- simulación lógica.
+
+La metodología importante es:
+
+```text
+DISEÑAR
+   ↓
+IMPLEMENTAR
+   ↓
+SIMULAR
+   ↓
+VERIFICAR
+```
+
+El simulador debe utilizarse principalmente para:
+
+```text
+comprobar el diseño
+```
+
+y no como sustituto del razonamiento previo.
+
+---
+
+# 🔗 Relación entre las cuatro semanas
+
+Cada semana sirve como base para la siguiente.
 
 ```mermaid
 flowchart TD
-    A["Comprender"] --> B["Definir variables"]
-    B --> C["Tabla de verdad"]
-    C --> D["Función lógica"]
-    D --> E["Simplificar"]
-    E --> F["Implementar"]
-    F --> G["Verificar"]
+
+    A["🟢 Semana 1<br/>¿Cómo se representa la información?"]
+
+    A --> B["🔵 Semana 2<br/>¿Cómo se describe matemáticamente un circuito?"]
+
+    B --> C["🟠 Semana 3<br/>¿Cómo se simplifica?"]
+
+    C --> D["🔴 Semana 4<br/>¿Cómo se construyen circuitos aritméticos?"]
 ```
 
 ---
 
-# 💻 Simulación
-
-Durante las actividades prácticas se emplea **Logisim-evolution**.
-
-El simulador permite:
-
-- colocar entradas y salidas;
-- construir compuertas;
-- observar niveles lógicos;
-- crear subcircuitos;
-- comprobar tablas de verdad;
-- utilizar componentes TTL;
-- comparar diseños.
-
-> **Principio de trabajo:** primero se diseña y posteriormente se utiliza el
-> simulador para comprobar el resultado.
-
----
-
-# 🧩 Conceptos esenciales de toda la Unidad
+# 🧠 Conceptos esenciales
 
 | Concepto | Idea principal |
 |---|---|
-| **Bit** | Unidad binaria que puede valer 0 o 1 |
-| **Compuerta** | Realiza una operación lógica |
-| **Tabla de verdad** | Describe todas las combinaciones posibles |
-| **Función booleana** | Representa matemáticamente el circuito |
+| **Bit** | Dígito binario que puede valer `0` o `1` |
+| **Binario** | Sistema de numeración de base 2 |
+| **Compuerta** | Elemento que realiza una operación lógica |
+| **Variable booleana** | Variable que toma valores `0` o `1` |
+| **Tabla de verdad** | Describe todas las combinaciones del sistema |
+| **Minitérmino** | Se relaciona con una fila donde `F=1` |
+| **Maxitérmino** | Se relaciona con una fila donde `F=0` |
 | **SOP** | Suma de productos |
 | **POS** | Producto de sumas |
 | **Karnaugh** | Método gráfico de simplificación |
 | **NAND/NOR** | Compuertas universales |
-| **Acarreo** | Bit que pasa a la siguiente posición durante una suma |
+| **Semisumador** | Suma dos bits |
+| **Sumador completo** | Suma `A`, `B` y `Cin` |
+| **Carry** | Acarreo entre etapas |
 | **Overflow** | Resultado fuera del rango representable |
+| **ALU** | Unidad Aritmético-Lógica |
 
 ---
 
-# ✅ Resultado de aprendizaje esperado
+# 📐 Fórmulas esenciales
 
-Al terminar la Unidad 1 se debe poder recorrer de manera razonada el proceso:
+## Número de combinaciones
 
-> **problema → variables → tabla de verdad → expresión → simplificación →
-> circuito → comprobación**
-
-y comprender cómo esos principios permiten construir sistemas más complejos,
-como los circuitos aritméticos de un procesador.
+```text
+2ⁿ
+```
 
 ---
 
-# 📝 Organización de este cuaderno
+## Complemento a dos
 
-Cada semana incluye:
+```text
+-N = N' + 1
+```
 
-- explicación conceptual;
-- fórmulas;
-- tablas;
-- ejemplos;
-- esquemas;
-- relaciones entre conceptos;
-- síntesis final;
-- navegación hacia la siguiente sección.
+---
+
+## De Morgan
+
+```text
+(X·Y)' = X' + Y'
+```
+
+```text
+(X+Y)' = X'·Y'
+```
+
+---
+
+## Semisumador
+
+```text
+S = A⊕B
+```
+
+```text
+C = A·B
+```
+
+---
+
+## Sumador completo
+
+```text
+S = A⊕B⊕Cin
+```
+
+```text
+Cout = AB + ACin + BCin
+```
+
+---
+
+## Resta mediante complemento a dos
+
+```text
+A-B = A+B'+1
+```
+
+---
+
+## Overflow
+
+```text
+V = C3⊕C4
+```
+
+---
+
+# 🧭 Ruta recomendada de consulta
+
+Si deseas estudiar toda la Unidad desde el comienzo:
+
+```text
+Semana 1
+   ↓
+Semana 2
+   ↓
+Semana 3
+   ↓
+Semana 4
+   ↓
+Resumen
+   ↓
+Ejemplos resueltos
+```
+
+---
+
+# 📚 Accesos rápidos
+
+### 🟢 Fundamentos
+
+➡️ [Semana 1](semana-1/README.md)
+
+### 🔵 Diseño lógico
+
+➡️ [Semana 2](semana-2/README.md)
+
+### 🟠 Simplificación
+
+➡️ [Semana 3](semana-3/README.md)
+
+### 🔴 Circuitos aritméticos
+
+➡️ [Semana 4](semana-4/README.md)
+
+### 📚 Repaso
+
+➡️ [Resumen de la Unidad](resumen-unidad/README.md)
+
+### 🧩 Aplicación
+
+➡️ [Ejemplos Resueltos](ejemplos-resueltos/README.md)
+
+---
+
+# ✅ Conclusión
+
+Durante la Unidad 1 se desarrolló progresivamente el proceso necesario para
+comprender y diseñar circuitos combinacionales.
+
+Se comenzó con la representación binaria y las compuertas lógicas, para
+posteriormente estudiar su representación mediante álgebra de Boole.
+
+Después se incorporaron formas canónicas y métodos de simplificación como los
+mapas de Karnaugh.
+
+Finalmente, estos conocimientos se aplicaron a circuitos capaces de realizar
+operaciones aritméticas.
+
+Todo el proceso puede resumirse mediante:
+
+```text
+REPRESENTAR
+     ↓
+DESCRIBIR
+     ↓
+SIMPLIFICAR
+     ↓
+IMPLEMENTAR
+     ↓
+VERIFICAR
+```
 
 ---
 
 <div align="center">
 
-## 🚀 Comenzar
+# 🎓 CUADERNO DIGITAL DE SÍNTESIS
 
-### [🟢 Ir a Semana 1](semana-1/README.md)
-
----
+### Unidad 1 · Diseño de Circuitos
 
 **Universidad Nacional de Loja**  
-**Carrera de Computación · Diseño de Circuitos**
+**Carrera de Computación**
 
-**Sdier Emanuel Roblez Roblez**
+### Sdier Emanuel Roblez Roblez
+
+<br>
+
+[⬆️ Volver al índice](#indice)
 
 </div>
+````
