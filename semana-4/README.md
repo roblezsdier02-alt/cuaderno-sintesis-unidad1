@@ -26,11 +26,11 @@
 2. [Acarreo](#acarreo)
 3. [Semisumador](#semisumador)
 4. [Sumador completo](#completo)
-5. [Ecuaciones](#ecuaciones)
+5. [Ecuaciones del sumador completo](#ecuaciones)
 6. [Sumador de 4 bits](#cuatrobits)
 7. [Ripple Carry](#ripple)
-8. [Retardo](#retardo)
-9. [Resta](#resta)
+8. [Retardo de propagación](#retardo)
+9. [Resta mediante complemento a dos](#resta)
 10. [Sumador/restador](#sumadorrestador)
 11. [Overflow](#overflow)
 12. [Comparador](#comparador)
@@ -39,11 +39,30 @@
 
 ---
 
+# 🎯 Objetivo de la Semana 4
+
+Comprender cómo los principios de lógica combinacional pueden utilizarse para
+construir circuitos capaces de realizar operaciones aritméticas.
+
+Durante esta semana se estudian:
+
+- suma binaria;
+- acarreo;
+- semisumadores;
+- sumadores completos;
+- sumadores de varios bits;
+- resta mediante complemento a dos;
+- overflow;
+- retardo de propagación;
+- comparación.
+
+---
+
 <a id="suma"></a>
 
 # 1. ➕ Suma binaria
 
-Para sumar un solo bit existen únicamente cuatro casos.
+Para sumar dos bits existen únicamente cuatro posibilidades.
 
 | Operación | Resultado | S | C |
 |:---:|:---:|:---:|:---:|
@@ -58,19 +77,27 @@ Donde:
 S = Sum
 ```
 
-representa el bit que se escribe.
+representa:
 
-Y:
+```text
+el bit que escribimos
+```
+
+Mientras:
 
 ```text
 C = Carry
 ```
 
-representa el bit que se lleva a la siguiente columna.
+representa:
+
+```text
+el bit que llevamos a la siguiente columna
+```
 
 ---
 
-## Analogía decimal
+## Analogía con decimal
 
 En decimal:
 
@@ -78,19 +105,38 @@ En decimal:
 7 + 5 = 12
 ```
 
-se escribe:
+Escribimos:
 
 ```text
 2
 ```
 
-y se lleva:
+y llevamos:
 
 ```text
 1
 ```
 
-En binario ocurre exactamente la misma idea.
+En binario ocurre exactamente el mismo principio.
+
+Cuando:
+
+```text
+1 + 1
+```
+
+obtenemos:
+
+```text
+10₂
+```
+
+Entonces:
+
+```text
+S = 0
+C = 1
+```
 
 ---
 
@@ -98,7 +144,7 @@ En binario ocurre exactamente la misma idea.
 
 # 2. 🔁 Acarreo
 
-Ejemplo:
+Consideremos:
 
 ```text
    0110
@@ -113,24 +159,23 @@ En decimal:
 6 + 7 = 13
 ```
 
-Cada columna puede producir un acarreo hacia la siguiente.
+Al sumar cada columna pueden aparecer acarreos.
 
-Un acarreo puede provocar otro:
+Un acarreo producido en una columna debe utilizarse en la siguiente.
 
 ```mermaid
 flowchart RL
-    A["Bit 0"] -->|Carry| B["Bit 1"]
-    B -->|Carry| C["Bit 2"]
-    C -->|Carry| D["Bit 3"]
+
+    B0["Columna 0"] -->|Carry| B1["Columna 1"]
+    B1 -->|Carry| B2["Columna 2"]
+    B2 -->|Carry| B3["Columna 3"]
 ```
 
 ---
 
-# Dos tipos de columna
+# 🧠 Dos tipos de columnas
 
-## Primera columna
-
-Suma solamente:
+La primera columna solamente suma:
 
 ```text
 A
@@ -143,11 +188,7 @@ Por tanto utiliza un:
 SEMISUMADOR
 ```
 
----
-
-## Columnas siguientes
-
-Deben sumar:
+Las columnas siguientes deben sumar:
 
 ```text
 A
@@ -163,11 +204,25 @@ SUMADORES COMPLETOS
 
 ---
 
+[⬆️ Volver al contenido](#contenido)
+
+---
+
 <a id="semisumador"></a>
 
 # 3. 🟢 Semisumador
 
-El semisumador o **Half Adder** suma dos bits.
+Un semisumador, también llamado:
+
+```text
+Half Adder
+```
+
+es un circuito capaz de sumar:
+
+```text
+2 bits
+```
 
 Entradas:
 
@@ -194,17 +249,34 @@ C
 | 1 | 0 | 0 | 1 |
 | 1 | 1 | 1 | 0 |
 
+<p align="center">
+  <img src="../assets/semisumador.svg" width="100%" alt="Circuito semisumador">
+</p>
+
 ---
 
 ## Analizando S
 
-`S` vale `1` cuando:
+Observamos:
 
 ```text
-A ≠ B
+A B → S
+
+0 0 → 0
+0 1 → 1
+1 0 → 1
+1 1 → 0
 ```
 
-Eso corresponde a XOR:
+La salida vale `1` cuando las entradas son:
+
+```text
+DIFERENTES
+```
+
+Esta es exactamente la tabla de una XOR.
+
+Por tanto:
 
 ```text
 S = A ⊕ B
@@ -214,14 +286,16 @@ S = A ⊕ B
 
 ## Analizando C
 
-`C` vale `1` solamente cuando:
+El acarreo vale `1` solamente cuando:
 
 ```text
 A = 1
 B = 1
 ```
 
-Eso corresponde a AND:
+Esta es la operación AND.
+
+Por tanto:
 
 ```text
 C = A·B
@@ -229,32 +303,34 @@ C = A·B
 
 ---
 
-## Circuito
+## Ecuaciones del semisumador
 
-```mermaid
-flowchart LR
+```text
+S = A ⊕ B
+```
 
-    A["A"] --> XOR["XOR"]
-    B["B"] --> XOR
-    XOR --> S["S"]
-
-    A --> AND["AND"]
-    B --> AND
-    AND --> C["C"]
+```text
+C = A·B
 ```
 
 ---
 
 ## ¿Por qué se llama «semi»?
 
-Porque no posee una entrada para recibir el acarreo de una columna anterior.
+Porque no puede recibir:
 
-Por eso resulta apropiado conceptualmente para la primera columna de una suma
-simple.
+```text
+acarreo de entrada
+```
 
----
+Solamente trabaja con:
 
-[⬆️ Volver al contenido](#contenido)
+```text
+A
+B
+```
+
+Por eso conceptualmente corresponde a la primera columna de una suma.
 
 ---
 
@@ -262,7 +338,13 @@ simple.
 
 # 4. 🔵 Sumador completo
 
-Un **Full Adder** suma tres bits:
+Un sumador completo, o:
+
+```text
+Full Adder
+```
+
+debe sumar:
 
 ```text
 A
@@ -270,24 +352,28 @@ B
 Cin
 ```
 
-donde:
+Donde:
 
 ```text
-Cin = Carry in
+Cin = Carry In
 ```
 
-El circuito produce:
+es el acarreo procedente de la etapa anterior.
+
+Las salidas son:
 
 ```text
 S
 Cout
 ```
 
-donde:
+Donde:
 
 ```text
-Cout = Carry out
+Cout = Carry Out
 ```
+
+es el acarreo que se enviará a la siguiente etapa.
 
 ---
 
@@ -306,23 +392,35 @@ Cout = Carry out
 
 ---
 
-# 🧠 Truco para comprender la tabla
+# 🧠 Truco: contar los unos
 
-No es necesario memorizarla.
+No es necesario memorizar toda la tabla.
 
-Podemos contar cuántos `1` existen en cada fila.
+Podemos contar:
 
-| Cantidad de `1` | Resultado binario | Cout | S |
+```text
+cuántos unos existen
+```
+
+en:
+
+```text
+A
+B
+Cin
+```
+
+| Cantidad de unos | Resultado binario | Cout | S |
 |:---:|:---:|:---:|:---:|
 | 0 | `00` | 0 | 0 |
 | 1 | `01` | 0 | 1 |
 | 2 | `10` | 1 | 0 |
 | 3 | `11` | 1 | 1 |
 
-De aquí surgen dos ideas:
+Entonces podemos recordar:
 
 ```text
-S = 1 cuando hay una cantidad impar de unos
+S = 1 cuando existe una cantidad impar de unos
 ```
 
 y:
@@ -339,6 +437,8 @@ Cout = 1 cuando existen al menos dos unos
 
 ## Suma
 
+La suma corresponde a:
+
 ```text
 S = A ⊕ B ⊕ Cin
 ```
@@ -347,31 +447,75 @@ S = A ⊕ B ⊕ Cin
 
 ## Acarreo
 
-Una forma equivalente es:
+Una expresión posible es:
 
 ```text
 Cout = AB + ACin + BCin
 ```
 
-También puede construirse mediante dos semisumadores y una OR.
-
 ---
 
 # Construcción con dos semisumadores
 
-Primero:
+Un sumador completo también puede construirse utilizando:
+
+```text
+2 semisumadores
+```
+
+y:
+
+```text
+1 compuerta OR
+```
+
+<p align="center">
+  <img src="../assets/sumador-completo.svg" width="100%" alt="Circuito sumador completo">
+</p>
+
+---
+
+## Primera etapa
 
 ```text
 S1 = A ⊕ B
+```
+
+```text
 C1 = A·B
 ```
 
-Después:
+---
+
+## Segunda etapa
+
+Se suma:
+
+```text
+S1
+```
+
+con:
+
+```text
+Cin
+```
+
+Entonces:
 
 ```text
 S = S1 ⊕ Cin
+```
+
+y:
+
+```text
 C2 = S1·Cin
 ```
+
+---
+
+## Acarreo final
 
 Finalmente:
 
@@ -379,24 +523,9 @@ Finalmente:
 Cout = C1 + C2
 ```
 
-Representación:
+---
 
-```mermaid
-flowchart LR
-
-    A["A"] --> H1["HA 1"]
-    B["B"] --> H1
-
-    H1 --> H2["HA 2"]
-    CIN["Cin"] --> H2
-
-    H2 --> S["S"]
-
-    H1 --> OR["OR"]
-    H2 --> OR
-
-    OR --> COUT["Cout"]
-```
+[⬆️ Volver al contenido](#contenido)
 
 ---
 
@@ -404,35 +533,50 @@ flowchart LR
 
 # 6. 4️⃣ Sumador de 4 bits
 
-Para sumar:
+Para sumar dos números:
 
 ```text
 A3 A2 A1 A0
 ```
 
-con:
+y:
 
 ```text
 B3 B2 B1 B0
 ```
 
-pueden conectarse cuatro etapas.
+se conectan varias etapas.
 
-El acarreo de una etapa alimenta a la siguiente.
+La regla fundamental es:
+
+```text
+Cout de una etapa → Cin de la siguiente
+```
+
+Representación conceptual:
 
 ```mermaid
 flowchart RL
 
-    FA0["FA 0<br/>A0 B0"] -->|C1| FA1["FA 1<br/>A1 B1"]
-    FA1 -->|C2| FA2["FA 2<br/>A2 B2"]
-    FA2 -->|C3| FA3["FA 3<br/>A3 B3"]
-    FA3 -->|Cout| C["Salida de acarreo"]
+    FA0["FA 0<br/>A0 + B0"] -->|C1| FA1["FA 1<br/>A1 + B1"]
+
+    FA1 -->|C2| FA2["FA 2<br/>A2 + B2"]
+
+    FA2 -->|C3| FA3["FA 3<br/>A3 + B3"]
+
+    FA3 -->|Cout| C["Acarreo final"]
 ```
 
-La regla esencial es:
+Las salidas serán:
 
 ```text
-Cout de una etapa → Cin de la siguiente
+S3 S2 S1 S0
+```
+
+más:
+
+```text
+Cout
 ```
 
 ---
@@ -441,23 +585,47 @@ Cout de una etapa → Cin de la siguiente
 
 # 7. 🌊 Ripple Carry
 
-Esta arquitectura se denomina:
+La arquitectura anterior recibe el nombre:
 
 ```text
 Ripple Carry Adder
 ```
 
-porque el acarreo se propaga de una etapa a otra como una onda.
+porque el acarreo avanza:
+
+```text
+etapa por etapa
+```
+
+como una onda.
 
 ```mermaid
 flowchart LR
-    B0["Etapa 0"] --> B1["Etapa 1"]
-    B1 --> B2["Etapa 2"]
-    B2 --> B3["Etapa 3"]
+
+    B0["Bit 0"] --> B1["Bit 1"]
+    B1 --> B2["Bit 2"]
+    B2 --> B3["Bit 3"]
 ```
 
-Una etapa no puede conocer completamente su resultado hasta recibir el acarreo
-procedente de la anterior.
+La etapa siguiente necesita esperar el acarreo producido por la anterior.
+
+---
+
+## Consecuencia
+
+Cuantos más bits tenga el sumador:
+
+```text
+más etapas debe atravesar el acarreo
+```
+
+Por tanto:
+
+```text
+mayor será el tiempo necesario
+```
+
+para que el resultado completo se estabilice.
 
 ---
 
@@ -465,15 +633,27 @@ procedente de la anterior.
 
 # 8. ⏱️ Retardo de propagación
 
-Las compuertas físicas no responden instantáneamente.
+Las compuertas digitales reales no responden instantáneamente.
 
-Supongamos aproximadamente:
+Cada compuerta posee un tiempo de propagación:
+
+```text
+tpd
+```
+
+En los ejercicios se puede utilizar aproximadamente:
 
 ```text
 tpd ≈ 10 ns
 ```
 
-Si el acarreo atraviesa aproximadamente dos niveles de compuertas por etapa:
+Si el acarreo atraviesa aproximadamente:
+
+```text
+2 compuertas por etapa
+```
+
+podemos estimar:
 
 ```text
 Retardo ≈ 2 · n · 10 ns
@@ -489,16 +669,16 @@ n = número de bits
 
 ## Ejemplos
 
-| Bits | Compuertas aproximadas | Retardo |
+| Bits | Compuertas aproximadas | Retardo aproximado |
 |:---:|:---:|---:|
-| 4 | 8 | ≈ 80 ns |
-| 16 | 32 | ≈ 320 ns |
-| 32 | 64 | ≈ 640 ns |
+| 4 | 8 | 80 ns |
+| 16 | 32 | 320 ns |
+| 32 | 64 | 640 ns |
 
-Conclusión:
+Entonces:
 
 ```text
-más bits → más etapas de acarreo → mayor retardo
+más bits → más retardo
 ```
 
 ---
@@ -517,13 +697,13 @@ Una resta:
 A - B
 ```
 
-puede escribirse como:
+puede transformarse en:
 
 ```text
 A + (-B)
 ```
 
-En complemento a dos:
+Sabemos que mediante complemento a dos:
 
 ```text
 -B = B' + 1
@@ -532,11 +712,16 @@ En complemento a dos:
 Entonces:
 
 ```text
-A - B = A + B' + 1
+A - B
 ```
 
-Esto permite utilizar prácticamente el mismo circuito que ya sabemos utilizar
-para sumar.
+equivale a:
+
+```text
+A + B' + 1
+```
+
+Esto permite reutilizar un circuito sumador para realizar también restas.
 
 ---
 
@@ -544,7 +729,7 @@ para sumar.
 
 # 10. 🔀 Sumador / Restador
 
-Se introduce una señal de control:
+Para seleccionar entre suma y resta se utiliza una señal de control:
 
 ```text
 M
@@ -552,67 +737,76 @@ M
 
 ---
 
+## Tabla de control
+
+| M | B entra como | Cin inicial | Operación |
+|:---:|---|:---:|---|
+| 0 | `B` | 0 | `A+B` |
+| 1 | `B'` | 1 | `A-B` |
+
+<p align="center">
+  <img src="../assets/sumador-restador.svg" width="100%" alt="Sumador restador de cuatro bits">
+</p>
+
+---
+
 ## Cuando M = 0
 
-Queremos sumar:
-
-```text
-A + B
-```
-
-Cada bit de B pasa por una XOR:
+Cada bit de `B` pasa por una XOR.
 
 ```text
 Bi ⊕ 0 = Bi
 ```
 
-Por tanto, B no cambia.
-
-Y:
+Por tanto:
 
 ```text
-Cin inicial = 0
+B no cambia
 ```
 
-Resultado:
+Además:
 
 ```text
-A + B
+Cin₀ = 0
+```
+
+Entonces el circuito realiza:
+
+```text
+A+B
 ```
 
 ---
 
 ## Cuando M = 1
 
-Queremos restar:
-
-```text
-A - B
-```
-
-Entonces:
+Tenemos:
 
 ```text
 Bi ⊕ 1 = Bi'
 ```
 
-Los bits de B se invierten.
+Por tanto:
+
+```text
+B se invierte
+```
 
 Además:
 
 ```text
-Cin inicial = 1
+Cin₀ = 1
 ```
 
-Así obtenemos:
+Obtenemos:
 
 ```text
 B' + 1
 ```
 
-que es el complemento a dos de B.
+que corresponde al complemento a dos.
 
-Finalmente:
+Entonces:
 
 ```text
 A + B' + 1
@@ -621,56 +815,40 @@ A + B' + 1
 equivale a:
 
 ```text
-A - B
+A-B
 ```
 
 ---
 
-## Tabla de control
+## ¿Por qué XOR y no NOT?
 
-| M | B pasa como | Cin inicial | Operación |
-|:---:|---|:---:|---|
-| 0 | `B` | 0 | `A+B` |
-| 1 | `B'` | 1 | `A-B` |
-
----
-
-## Arquitectura conceptual
-
-```mermaid
-flowchart LR
-
-    M["M"] --> XOR["XOR sobre cada Bi"]
-    B["B"] --> XOR
-    XOR --> ADD["Sumador"]
-
-    A["A"] --> ADD
-    M --> ADD
-
-    ADD --> R["Resultado"]
-```
-
----
-
-# 🤔 ¿Por qué XOR y no NOT?
-
-Una NOT:
+Una compuerta NOT:
 
 ```text
 siempre invierte
 ```
 
-En cambio XOR permite controlar la inversión.
+No permite seleccionar entre los dos modos.
+
+En cambio XOR cumple:
 
 ```text
 B ⊕ 0 = B
 ```
 
+y:
+
 ```text
 B ⊕ 1 = B'
 ```
 
-Por eso XOR permite seleccionar entre suma y resta.
+Por tanto:
+
+```text
+M
+```
+
+controla si `B` debe conservarse o invertirse.
 
 ---
 
@@ -678,42 +856,71 @@ Por eso XOR permite seleccionar entre suma y resta.
 
 # 11. ⚠️ Overflow
 
-El **overflow** ocurre cuando el resultado de una operación con signo queda
-fuera del rango representable con la cantidad disponible de bits.
+El overflow o desbordamiento ocurre cuando el resultado de una operación con
+signo queda fuera del rango que puede representarse con la cantidad disponible
+de bits.
 
-En el diseño estudiado:
+En el circuito estudiado:
 
 ```text
 V = C3 ⊕ C4
 ```
 
-donde:
-
-- `C3` es el acarreo que entra al bit más significativo;
-- `C4` es el acarreo que sale de ese bit.
-
----
-
-## Regla
+Donde:
 
 ```text
-V = 0 → no existe overflow
-V = 1 → existe overflow
+C3 = acarreo que entra al bit más significativo
+```
+
+y:
+
+```text
+C4 = acarreo que sale del bit más significativo
 ```
 
 ---
 
-# ⚠️ Cout no es lo mismo que overflow
+## Interpretación
 
-No debemos utilizar simplemente:
+```text
+V = 0
+```
+
+significa:
+
+```text
+no existe overflow
+```
+
+Mientras:
+
+```text
+V = 1
+```
+
+significa:
+
+```text
+existe overflow
+```
+
+---
+
+## ⚠️ Cout no es overflow
+
+No debemos confundir:
 
 ```text
 Cout
 ```
 
-para determinar overflow en operaciones con signo.
+con:
 
-La condición estudiada es:
+```text
+Overflow
+```
+
+Para números con signo, la condición estudiada es:
 
 ```text
 V = C3 ⊕ C4
@@ -725,13 +932,19 @@ V = C3 ⊕ C4
 
 # 12. ⚖️ Comparador
 
-Un comparador lógico determina relaciones entre dos números.
+Un comparador lógico permite determinar la relación entre dos números.
 
-Salidas típicas:
+Por ejemplo:
 
 ```text
 A > B
+```
+
+```text
 A = B
+```
+
+```text
 A < B
 ```
 
@@ -739,7 +952,7 @@ A < B
 
 ## Igualdad de un bit
 
-XNOR vale `1` cuando dos entradas son iguales.
+La compuerta XNOR es útil para detectar igualdad porque:
 
 | A | B | A XNOR B |
 |:---:|:---:|:---:|
@@ -748,7 +961,17 @@ XNOR vale `1` cuando dos entradas son iguales.
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |
 
-Por eso XNOR resulta útil para detectar igualdad.
+Entonces:
+
+```text
+XNOR = 1
+```
+
+cuando:
+
+```text
+A = B
+```
 
 ---
 
@@ -756,13 +979,17 @@ Por eso XNOR resulta útil para detectar igualdad.
 
 # 13. 🧠 Relación con la ALU
 
-Los circuitos aritméticos constituyen una base para comprender la:
+Los circuitos aritméticos son fundamentales para comprender la:
 
 ```text
 ALU
 ```
 
-**Arithmetic Logic Unit**
+que significa:
+
+```text
+Arithmetic Logic Unit
+```
 
 o:
 
@@ -770,7 +997,14 @@ o:
 Unidad Aritmético-Lógica
 ```
 
-La ALU puede realizar operaciones como:
+Una ALU puede realizar operaciones como:
+
+- suma;
+- resta;
+- AND;
+- OR;
+- comparación;
+- otras operaciones lógicas.
 
 ```mermaid
 flowchart TD
@@ -794,15 +1028,26 @@ flowchart TD
 
 # 🔗 Relación con las semanas anteriores
 
-La Semana 4 utiliza prácticamente todo lo aprendido anteriormente.
+Los circuitos aritméticos combinan prácticamente todo lo estudiado durante la
+Unidad 1.
 
 ```mermaid
 flowchart LR
-    S1["Semana 1<br/>XOR · AND"] --> HA["Semisumador"]
-    S2["Semana 2<br/>Tabla y álgebra"] --> FA["Sumador completo"]
-    S3["Semana 3<br/>Karnaugh"] --> FA
-    HA --> FA
+
+    S1["Semana 1<br/>XOR · AND · OR"]
+    S2["Semana 2<br/>Álgebra y tablas"]
+    S3["Semana 3<br/>Karnaugh"]
+
+    S1 --> HA["Semisumador"]
+
+    HA --> FA["Sumador completo"]
+
+    S2 --> FA
+
+    S3 --> FA
+
     FA --> ADD["Sumador de 4 bits"]
+
     ADD --> SR["Sumador / Restador"]
 ```
 
@@ -815,17 +1060,18 @@ flowchart LR
 | Concepto | Idea esencial |
 |---|---|
 | `S` | Bit que se escribe |
-| `C` | Bit de acarreo |
+| `C` | Bit que se lleva |
 | Semisumador | `S=XOR`, `C=AND` |
 | Sumador completo | Suma `A`, `B` y `Cin` |
-| `S` del FA | Cantidad impar de unos |
-| `Cout` del FA | Al menos dos unos |
+| `S` del Full Adder | Cantidad impar de unos |
+| `Cout` | Al menos dos unos |
+| Sumador de 4 bits | Etapas conectadas mediante acarreo |
 | Ripple Carry | El acarreo avanza etapa por etapa |
 | Resta | `A+B'+1` |
 | `M=0` | Suma |
 | `M=1` | Resta |
 | Overflow | `V=C3⊕C4` |
-| Retardo | Crece con el número de etapas |
+| Retardo | Aumenta con el número de bits |
 
 ---
 
@@ -835,36 +1081,70 @@ flowchart LR
 flowchart TD
 
     A["Representación binaria"]
+
     A --> B["Compuertas"]
+
     B --> C["Álgebra de Boole"]
-    C --> D["Tablas de verdad"]
+
+    C --> D["Tabla de verdad"]
+
     D --> E["SOP / POS"]
-    E --> F["Karnaugh"]
-    F --> G["Circuitos mínimos"]
+
+    E --> F["Mapas de Karnaugh"]
+
+    F --> G["Circuitos simplificados"]
+
     G --> H["Semisumador"]
+
     H --> I["Sumador completo"]
+
     I --> J["Sumador de varios bits"]
+
     J --> K["Suma / Resta"]
+
+    K --> L["Circuitos aritméticos"]
 ```
 
 ---
 
 # 🎓 Conclusión de la Unidad 1
 
-La lógica combinacional permite construir sistemas complejos a partir de
-operaciones simples.
+Durante la Unidad 1 se recorrió progresivamente el proceso de diseño de lógica
+combinacional.
 
-Durante la unidad se comenzó estudiando la representación mediante `0` y `1`,
-posteriormente se analizaron las compuertas lógicas, se utilizó el álgebra de
-Boole para describir circuitos, se aprendió a minimizar funciones mediante
-Karnaugh y finalmente se aplicaron estos conocimientos al diseño de circuitos
-aritméticos.
+Primero se estudió cómo los sistemas digitales representan información mediante
+los estados `0` y `1`.
 
-La idea fundamental puede resumirse como:
+Posteriormente se analizaron las compuertas lógicas y su representación mediante
+álgebra de Boole.
+
+A continuación se aprendió a construir tablas de verdad y funciones canónicas,
+para luego simplificarlas mediante mapas de Karnaugh.
+
+Finalmente, estos conocimientos se aplicaron al desarrollo de circuitos
+aritméticos capaces de realizar operaciones de suma, resta y comparación.
+
+La metodología general puede resumirse como:
 
 ```text
-ESPECIFICAR → REPRESENTAR → SIMPLIFICAR → IMPLEMENTAR → VERIFICAR
+ESPECIFICAR
+     ↓
+REPRESENTAR
+     ↓
+SIMPLIFICAR
+     ↓
+IMPLEMENTAR
+     ↓
+VERIFICAR
 ```
+
+---
+
+# 🏁 Resultado final
+
+Al terminar esta unidad se dispone de las bases necesarias para comprender cómo
+operaciones aparentemente complejas realizadas por una computadora pueden
+construirse a partir de bloques simples de lógica digital.
 
 ---
 
@@ -876,11 +1156,13 @@ ESPECIFICAR → REPRESENTAR → SIMPLIFICAR → IMPLEMENTAR → VERIFICAR
 
 <div align="center">
 
-# 🎉 Unidad 1 completada
+# 🎉 UNIDAD 1 COMPLETADA
 
-**Diseño de Circuitos**
+### Diseño de Circuitos
 
 **Universidad Nacional de Loja**
+
+**Carrera de Computación**
 
 **Sdier Emanuel Roblez Roblez**
 
