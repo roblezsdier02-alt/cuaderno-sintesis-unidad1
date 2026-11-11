@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="500" viewBox="0 0 1400 500">
+
+  <rect width="1400" height="500" rx="28" fill="#f8faf9"/>
+
+  <text x="55" y="70" font-family="Arial" font-size="38" font-weight="800" fill="#123c33">
+    Procedimiento clásico de diseño combinacional
+  </text>
+
+  <text x="55" y="108" font-family="Arial" font-size="18" fill="#64748b">
+    Del problema real al circuito lógico verificado.
+  </text>
+
+  <g font-family="Arial">
+
+    <!-- 1 -->
+    <rect x="50" y="185" width="165" height="125" rx="20" fill="#123c33"/>
+    <text x="132" y="225" text-anchor="middle" font-size="17" fill="#b9ded0">PASO 1</text>
+    <text x="132" y="260" text-anchor="middle" font-size="21" font-weight="700" fill="#ffffff">
+      Problema
+    </text>
+    <text x="132" y="290" text-anchor="middle" font-size="15" fill="#d7eee6">
+      Comprender
+    </text>
+
+    <!-- Arrow -->
+    <text x="235" y="260" font-size="38" fill="#d99a00">→</text>
+
+    <!-- 2 -->
+    <rect x="285" y="185" width="165" height="125" rx="20" fill="#123c33"/>
+    <text x="367" y="225" text-anchor="middle" font-size="17" fill="#b9ded0">PASO 2</text>
+    <text x="367" y="260" text-anchor="middle" font-size="21" font-weight="700" fill="#ffffff">
+      Variables
+    </text>
+    <text x="367" y="290" text-anchor="middle" font-size="15" fill="#d7eee6">
+      Entradas / salida
+    </text>
+
+    <text x="470" y="260" font-size="38" fill="#d99a00">→</text>
+
+    <!-- 3 -->
+    <rect x="520" y="185" width="165" height="125" rx="20" fill="#0f766e"/>
+    <text x="602" y="225" text-anchor="middle" font-size="17" fill="#d6fff2">PASO 3</text>
+    <text x="602" y="252" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">
+      Tabla de
+    </text>
+    <text x="602" y="278" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">
+      verdad
+    </text>
+
+    <text x="705" y="260" font-size="38" fill="#d99a00">→</text>
+
+    <!-- 4 -->
+    <rect x="755" y="185" width="165" height="125" rx="20" fill="#0f766e"/>
+    <text x="837" y="225" text-anchor="middle" font-size="17" fill="#d6fff2">PASO 4</text>
+    <text x="837" y="260" text-anchor="middle" font-size="21" font-weight="700" fill="#ffffff">
+      Función
+    </text>
+    <text x="837" y="290" text-anchor="middle" font-size="15" fill="#d6fff2">
+      SOP / POS
+    </text>
+
+    <text x="940" y="260" font-size="38" fill="#d99a00">→</text>
+
+    <!-- 5 -->
+    <rect x="990" y="185" width="165" height="125" rx="20" fill="#e6a51c"/>
+    <text x="1072" y="225" text-anchor="middle" font-size="17" fill="#fff7dc">PASO 5</text>
+    <text x="1072" y="260" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">
+      Simplificar
+    </text>
+    <text x="1072" y="290" text-anchor="middle" font-size="15" fill="#fff7dc">
+      Menos hardware
+    </text>
+
+    <text x="1175" y="260" font-size="38" fill="#d99a00">→</text>
+
+    <!-- 6 -->
+    <rect x="1225" y="185" width="130" height="125" rx="20" fill="#123c33"/>
+    <text x="1290" y="225" text-anchor="middle" font-size="17" fill="#b9ded0">PASO 6</text>
+    <text x="1290" y="260" text-anchor="middle" font-size="20" font-weight="700" fill="#ffffff">
+      Circuito
+    </text>
+    <text x="1290" y="290" text-anchor="middle" font-size="15" fill="#d7eee6">
+      Verificar
+    </text>
+
+    <rect x="245" y="365" width="910" height="70" rx="18" fill="#e8f4ef"/>
+
+    <text x="700" y="408" text-anchor="middle" font-size="21" font-weight="700" fill="#123c33">
+      Diseñar primero → Simular después para comprobar
+    </text>
+
+  </g>
+</svg>
