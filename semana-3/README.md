@@ -2,7 +2,7 @@
 
 # 🟠 SEMANA 3
 
-## Mapas de Karnaugh, indiferentes y NAND/NOR
+## Mapas de Karnaugh, condiciones indiferentes y NAND/NOR
 
 **Unidad 1 · Diseño de Circuitos**
 
@@ -20,8 +20,8 @@
 
 # 📑 Contenido
 
-1. [¿Qué es Karnaugh?](#karnaugh)
-2. [Adyacencia](#adyacencia)
+1. [¿Qué es un mapa de Karnaugh?](#karnaugh)
+2. [Teorema de adyacencia](#adyacencia)
 3. [Código Gray](#gray)
 4. [Mapa de 3 variables](#k3)
 5. [Mapa de 4 variables](#k4)
@@ -33,7 +33,16 @@
 11. [NAND universal](#nand)
 12. [NOR universal](#nor)
 13. [Costo de implementación](#costo)
-14. [Síntesis](#sintesis)
+14. [Procedimiento completo](#procedimiento)
+15. [Síntesis](#sintesis)
+
+---
+
+# 🎯 Objetivo de la Semana 3
+
+Utilizar mapas de Karnaugh para obtener expresiones booleanas simplificadas,
+comprender el uso de condiciones indiferentes y aprender a implementar
+funciones lógicas utilizando exclusivamente compuertas NAND o NOR.
 
 ---
 
@@ -41,23 +50,45 @@
 
 # 1. 🗺️ ¿Qué es un mapa de Karnaugh?
 
-Un mapa de Karnaugh, también conocido como **K-map**, es una herramienta
-gráfica utilizada para simplificar funciones booleanas.
-
-Permite observar qué minitérminos o maxitérminos son lógicamente adyacentes y
-eliminar variables que dejan de afectar al resultado.
-
-La idea principal es:
+Un mapa de Karnaugh, también llamado:
 
 ```text
-agrupar → eliminar variables → simplificar
+K-map
 ```
+
+es una herramienta gráfica utilizada para simplificar funciones booleanas.
+
+Permite observar visualmente cuáles combinaciones de la tabla de verdad son
+lógicamente adyacentes.
+
+La idea general es:
+
+```text
+TABLA DE VERDAD
+       ↓
+MAPA DE KARNAUGH
+       ↓
+AGRUPACIONES
+       ↓
+EXPRESIÓN SIMPLIFICADA
+```
+
+<p align="center">
+  <img src="../assets/mapa-karnaugh.svg" width="100%" alt="Mapa de Karnaugh de cuatro variables">
+</p>
+
+La simplificación no modifica el comportamiento del circuito.
+
+Solamente obtiene otra expresión equivalente utilizando menos variables o
+menos términos.
 
 ---
 
 <a id="adyacencia"></a>
 
 # 2. 🔗 Teorema de adyacencia
+
+La simplificación de Karnaugh se fundamenta en el principio de adyacencia.
 
 Consideremos:
 
@@ -71,16 +102,16 @@ Sacamos factor común:
 X(Y + Y')
 ```
 
-Como:
+Sabemos que:
 
 ```text
 Y + Y' = 1
 ```
 
-obtenemos:
+Entonces:
 
 ```text
-X
+X·1 = X
 ```
 
 Por tanto:
@@ -93,6 +124,8 @@ XY + XY' = X
 
 ## Ejemplo con tres variables
 
+Consideremos:
+
 ```text
 AB'C' + AB'C
 ```
@@ -102,6 +135,14 @@ Factorizamos:
 ```text
 AB'(C' + C)
 ```
+
+Sabemos:
+
+```text
+C' + C = 1
+```
+
+Entonces:
 
 ```text
 AB'·1
@@ -119,15 +160,27 @@ La variable:
 C
 ```
 
-desaparece porque cambia entre `0` y `1` mientras el resto permanece igual.
+desaparece.
+
+---
+
+## 🧠 Idea fundamental
+
+Si dos minitérminos solamente difieren en una variable:
+
+```text
+esa variable puede eliminarse
+```
+
+Esto es precisamente lo que visualizan las agrupaciones de Karnaugh.
 
 ---
 
 <a id="gray"></a>
 
-# 3. 🔁 ¿Por qué se utiliza código Gray?
+# 3. 🔁 Código Gray en Karnaugh
 
-El orden habitual binario:
+Los mapas de Karnaugh no utilizan el orden binario tradicional:
 
 ```text
 00
@@ -136,26 +189,65 @@ El orden habitual binario:
 11
 ```
 
-no sirve para organizar Karnaugh porque entre `01` y `10` cambian dos bits.
-
-En su lugar se utiliza:
+En su lugar utilizan código Gray:
 
 ```text
 00
 01
 11
 10
+```
+
+La razón es que entre posiciones consecutivas cambia únicamente:
+
+```text
+1 bit
 ```
 
 ```mermaid
 flowchart LR
+
     A["00"] --> B["01"]
     B --> C["11"]
     C --> D["10"]
     D --> A
 ```
 
-Entre cada posición vecina cambia únicamente una variable.
+---
+
+## Comparación
+
+### Orden binario
+
+```text
+01 → 10
+```
+
+Cambian:
+
+```text
+2 bits
+```
+
+---
+
+### Código Gray
+
+```text
+01 → 11
+```
+
+Cambia:
+
+```text
+1 bit
+```
+
+Por esta razón Gray permite representar correctamente las adyacencias lógicas.
+
+---
+
+[⬆️ Volver al contenido](#contenido)
 
 ---
 
@@ -163,35 +255,40 @@ Entre cada posición vecina cambia únicamente una variable.
 
 # 4. 3️⃣ Mapa de Karnaugh de 3 variables
 
-Para tres variables:
+Si tenemos:
 
 ```text
-A, B, C
+A
+B
+C
 ```
 
-puede organizarse así:
+existen:
+
+```text
+2³ = 8 combinaciones
+```
+
+El mapa puede organizarse así:
 
 | A \ BC | 00 | 01 | 11 | 10 |
 |:---:|:---:|:---:|:---:|:---:|
 | 0 |  |  |  |  |
 | 1 |  |  |  |  |
 
-Las columnas están organizadas mediante código Gray.
-
----
-
-## Número de celdas
-
-Para `n` variables:
+Las columnas:
 
 ```text
-Número de celdas = 2ⁿ
+BC
 ```
 
-Entonces:
+siguen:
 
 ```text
-3 variables → 2³ = 8 celdas
+00
+01
+11
+10
 ```
 
 ---
@@ -200,19 +297,19 @@ Entonces:
 
 # 5. 4️⃣ Mapa de Karnaugh de 4 variables
 
-Para:
+Para cuatro variables:
 
 ```text
 A B C D
 ```
 
-el mapa contiene:
+existen:
 
 ```text
-2⁴ = 16 celdas
+2⁴ = 16 combinaciones
 ```
 
-Estructura:
+El mapa se organiza:
 
 | AB \ CD | 00 | 01 | 11 | 10 |
 |:---:|:---:|:---:|:---:|:---:|
@@ -221,7 +318,31 @@ Estructura:
 | 11 |  |  |  |  |
 | 10 |  |  |  |  |
 
-Tanto filas como columnas siguen código Gray.
+Tanto las filas como las columnas utilizan código Gray.
+
+---
+
+## Número general de celdas
+
+Para:
+
+```text
+n variables
+```
+
+tenemos:
+
+```text
+2ⁿ celdas
+```
+
+Ejemplos:
+
+| Variables | Celdas |
+|:---:|---:|
+| 2 | 4 |
+| 3 | 8 |
+| 4 | 16 |
 
 ---
 
@@ -229,10 +350,19 @@ Tanto filas como columnas siguen código Gray.
 
 # 6. 🟩 Reglas de agrupación
 
-Los grupos deben contener una cantidad de celdas equivalente a una potencia
-de dos.
+Las agrupaciones son la parte fundamental del método.
 
-Son válidos:
+---
+
+## Regla 1 · Potencias de dos
+
+Los grupos deben contener:
+
+```text
+2ᵏ celdas
+```
+
+Por tanto son válidos:
 
 ```text
 1
@@ -253,46 +383,72 @@ No son válidos:
 
 ---
 
-## Regla 1 · Grupos rectangulares
+## Regla 2 · Forma rectangular
 
-Los grupos deben formar rectángulos.
+Los grupos deben formar:
+
+```text
+rectángulos
+```
+
+No pueden formarse figuras arbitrarias.
 
 ---
 
-## Regla 2 · Formar grupos grandes
+## Regla 3 · Crear grupos grandes
 
-Siempre se intenta utilizar el grupo más grande posible.
+Siempre debe intentarse formar el grupo más grande posible.
+
+Prioridad:
 
 ```text
-8 celdas → mejor que 4
-4 celdas → mejor que 2
-2 celdas → mejor que 1
+16
+↓
+8
+↓
+4
+↓
+2
+↓
+1
+```
+
+Cuanto mayor sea el grupo:
+
+```text
+menos variables tendrá el término resultante
 ```
 
 ---
 
-## Regla 3 · Puede existir superposición
+## Regla 4 · Se permite superposición
 
-Una celda puede pertenecer a más de un grupo si esto permite simplificar mejor
-la función.
+Una celda puede pertenecer a más de un grupo si eso permite obtener una
+simplificación mejor.
 
 ---
 
-## Regla 4 · Los bordes son vecinos
+## Regla 5 · Los bordes son vecinos
 
-El mapa debe imaginarse como una superficie que se enrolla.
+El mapa debe imaginarse como si estuviera enrollado.
+
+Por tanto:
 
 ```text
-borde izquierdo ↔ borde derecho
+izquierda ↔ derecha
 ```
 
 y:
 
 ```text
-borde superior ↔ borde inferior
+arriba ↔ abajo
 ```
 
-Por eso las cuatro esquinas son adyacentes.
+También significa que:
+
+```text
+las cuatro esquinas son vecinas
+```
 
 ```mermaid
 flowchart LR
@@ -301,11 +457,23 @@ flowchart LR
 
 ---
 
-## Regla 5 · Cubrir los términos necesarios
+## Regla 6 · Cubrir todos los valores necesarios
 
-En SOP deben quedar cubiertos todos los `1`.
+Para SOP:
 
-En POS deben quedar cubiertos todos los `0`.
+```text
+todos los 1 deben estar cubiertos
+```
+
+Para POS:
+
+```text
+todos los 0 deben estar cubiertos
+```
+
+---
+
+[⬆️ Volver al contenido](#contenido)
 
 ---
 
@@ -313,20 +481,44 @@ En POS deben quedar cubiertos todos los `0`.
 
 # 7. 🟢 SOP mínima
 
-Para obtener una expresión SOP mínima:
+SOP significa:
 
 ```text
-se agrupan los 1
+Sum of Products
 ```
 
-Cada grupo genera un producto.
-
-Ejemplo conceptual:
+Para obtener una expresión SOP mediante Karnaugh:
 
 ```text
-Grupo 1 → A'B
+AGRUPAMOS LOS 1
+```
 
-Grupo 2 → CD'
+Cada agrupación produce un término producto.
+
+---
+
+## Regla para leer un grupo
+
+Dentro de un grupo:
+
+- una variable que permanece en `1` aparece normal;
+- una variable que permanece en `0` aparece complementada;
+- una variable que cambia desaparece.
+
+---
+
+## Ejemplo conceptual
+
+Supongamos que una agrupación genera:
+
+```text
+A'B
+```
+
+y otra:
+
+```text
+CD'
 ```
 
 Entonces:
@@ -337,34 +529,37 @@ F = A'B + CD'
 
 ---
 
-## ¿Qué variables permanecen?
-
-Una variable permanece en el término solamente si su valor se mantiene
-constante dentro de todo el grupo.
-
-Si cambia:
-
-```text
-0 ↔ 1
-```
-
-desaparece.
-
----
-
 <a id="pos"></a>
 
 # 8. 🔵 POS mínima
 
-Para POS:
+POS significa:
 
 ```text
-se agrupan los 0
+Product of Sums
 ```
 
-Cada agrupación produce un término suma.
+Para obtener POS:
 
-Después los términos se multiplican:
+```text
+AGRUPAMOS LOS 0
+```
+
+Cada grupo produce un término suma.
+
+Ejemplo:
+
+```text
+(A+B)
+```
+
+y:
+
+```text
+(C'+D)
+```
+
+Entonces:
 
 ```text
 F = (A+B)(C'+D)
@@ -372,11 +567,14 @@ F = (A+B)(C'+D)
 
 ---
 
-## Diferencia esencial
+## Diferencia fundamental
 
 ```text
-SOP → agrupar 1
-POS → agrupar 0
+SOP → agrupa 1
+```
+
+```text
+POS → agrupa 0
 ```
 
 ---
@@ -385,32 +583,42 @@ POS → agrupar 0
 
 # 9. 🧩 Implicantes
 
-Un grupo válido del mapa representa un **implicante**.
-
-Un grupo que no puede ampliarse sin incluir valores inválidos se denomina:
+Cada grupo válido del mapa representa un:
 
 ```text
-Implicante primo
+Implicante
 ```
-
-Un implicante primo que cubre al menos un término que ningún otro implicante
-puede cubrir se denomina:
-
-```text
-Implicante primo esencial
-```
-
-Los esenciales deben incluirse en la solución.
 
 ---
 
-## ¿Existe siempre una única solución?
+## Implicante primo
 
-No necesariamente.
+Es un grupo que no puede ampliarse más sin incluir valores que no corresponden.
 
-Puede haber más de una expresión mínima con el mismo costo lógico.
+---
 
-Por eso no basta con comparar únicamente la apariencia de las expresiones.
+## Implicante primo esencial
+
+Un implicante primo es esencial cuando cubre al menos un valor que ningún otro
+grupo puede cubrir.
+
+Por tanto:
+
+```text
+los implicantes primos esenciales deben formar parte de la solución
+```
+
+---
+
+## ⚠️ Una función puede tener varias soluciones mínimas
+
+No siempre existe una única forma simplificada.
+
+Dos soluciones diferentes podrían:
+
+- representar exactamente la misma función;
+- utilizar el mismo número de literales;
+- tener un costo lógico equivalente.
 
 ---
 
@@ -424,7 +632,7 @@ Las condiciones indiferentes se representan mediante:
 X
 ```
 
-También pueden aparecer como:
+o mediante:
 
 ```text
 d
@@ -438,14 +646,25 @@ don't care
 
 ---
 
-## Ejemplo BCD
+## ¿Qué significa?
 
-BCD utiliza solamente:
+Una condición indiferente representa una combinación que:
+
+- nunca ocurre;
+- no puede presentarse físicamente;
+- o cuyo resultado no importa.
+
+---
+
+## Ejemplo: BCD
+
+BCD representa:
 
 ```text
-0000 → 0
+0 → 0000
+1 → 0001
 ...
-1001 → 9
+9 → 1001
 ```
 
 Las combinaciones:
@@ -459,24 +678,30 @@ Las combinaciones:
 1111
 ```
 
-no corresponden a teclas decimales válidas.
+no corresponden a ningún dígito decimal.
 
-Si el sistema nunca recibe esas entradas, su salida puede considerarse
-indiferente.
+Si el circuito recibe información exclusivamente desde un teclado decimal,
+estas combinaciones nunca deberían aparecer.
+
+Por tanto pueden marcarse:
+
+```text
+X
+```
 
 ---
 
-## Regla fundamental
+## ¿Cómo se utilizan?
 
-Una `X` puede tratarse como:
+Una `X` puede utilizarse como:
 
 ```text
 1
 ```
 
-si permite formar un grupo mayor.
+si ayuda a crear una agrupación mayor.
 
-También puede tratarse como:
+También puede ignorarse y tratarse como:
 
 ```text
 0
@@ -486,20 +711,26 @@ si no resulta útil.
 
 ---
 
-## Tres reglas
+## Regla fundamental
 
-### Puede usarse
+> Una condición indiferente se utiliza únicamente cuando ayuda a simplificar.
 
-Si agranda un grupo.
+---
 
-### Puede ignorarse
+## Tres situaciones
 
-Si no produce simplificación.
+### ✅ Utilizar como 1
 
-### No debe formar un grupo inútil
+Cuando permite ampliar una agrupación.
 
-No se crea un grupo exclusivamente con `X` si no ayuda a cubrir una salida
-requerida.
+### ✅ Ignorar
+
+Cuando no aporta ninguna mejora.
+
+### ❌ Crear un grupo únicamente con X
+
+No tiene sentido formar un grupo compuesto exclusivamente por condiciones
+indiferentes si no cubre ningún valor necesario.
 
 ---
 
@@ -511,21 +742,52 @@ Ejemplo:
 F = Σm(5,6,7,8,9) + d(10,11,12,13,14,15)
 ```
 
+Aquí:
+
+```text
+Σm(...)
+```
+
+representa los minitérminos donde la función debe valer `1`.
+
+Mientras:
+
+```text
+d(...)
+```
+
+representa condiciones indiferentes.
+
 ---
 
-# 📉 Efecto de las condiciones indiferentes
+# 📉 Beneficio de utilizar las X
 
-Sin aprovechar las `X`, una función puede requerir numerosos literales.
+Sin condiciones indiferentes:
 
-Al aprovecharlas, pueden formarse agrupaciones mayores.
+```text
+grupos más pequeños
+```
+
+pueden provocar:
+
+```text
+más variables
+```
+
+y por tanto:
+
+```text
+más hardware
+```
+
+Al utilizar correctamente las X:
 
 ```mermaid
 flowchart LR
-    A["Mapa sin X"] --> B["Grupos pequeños"]
-    B --> C["Más literales"]
 
-    D["Mapa usando X"] --> E["Grupos mayores"]
-    E --> F["Menos literales"]
+    A["Condiciones indiferentes"] --> B["Grupos mayores"]
+    B --> C["Menos literales"]
+    C --> D["Menos hardware"]
 ```
 
 ---
@@ -538,10 +800,8 @@ flowchart LR
 
 # 11. 🟨 NAND como compuerta universal
 
-Una compuerta es **universal** cuando puede utilizarse para construir las
-operaciones lógicas fundamentales.
-
-Con NAND podemos construir:
+Una compuerta universal es aquella que permite construir las operaciones
+fundamentales:
 
 ```text
 NOT
@@ -549,11 +809,15 @@ AND
 OR
 ```
 
-Por lo tanto, cualquier función booleana puede implementarse utilizando NAND.
+La compuerta NAND es universal.
+
+Por tanto:
+
+> Cualquier función booleana puede implementarse únicamente utilizando NAND.
 
 ---
 
-## NOT con NAND
+## NOT utilizando NAND
 
 Conectamos la misma entrada a ambos terminales:
 
@@ -563,6 +827,7 @@ Conectamos la misma entrada a ambos terminales:
 
 ```mermaid
 flowchart LR
+
     A["A"] --> N["NAND"]
     A --> N
     N --> Y["A'"]
@@ -570,7 +835,7 @@ flowchart LR
 
 ---
 
-## AND con NAND
+## AND utilizando NAND
 
 Primero:
 
@@ -578,7 +843,7 @@ Primero:
 X = (AB)'
 ```
 
-Después negamos nuevamente:
+Después invertimos nuevamente:
 
 ```text
 AB = (X·X)'
@@ -592,24 +857,41 @@ AB = ((AB)'·(AB)')'
 
 ---
 
-## OR con NAND
+## OR utilizando NAND
 
-Por De Morgan:
+Utilizamos De Morgan:
 
 ```text
-A+B = (A'B')'
+A+B = (A'·B')'
 ```
 
-Por tanto, negando previamente `A` y `B` con NAND se puede obtener OR.
+Primero obtenemos:
+
+```text
+A'
+B'
+```
+
+mediante NAND.
+
+Después aplicamos otra NAND.
 
 ---
 
-## Estructura NAND-NAND
+## Implementación NAND-NAND
 
-Una función SOP puede transformarse naturalmente a una implementación:
+Una función en forma:
 
 ```text
-NAND → NAND
+SOP
+```
+
+puede transformarse naturalmente en una estructura:
+
+```text
+NAND
+  ↓
+NAND
 ```
 
 ---
@@ -618,7 +900,9 @@ NAND → NAND
 
 # 12. 🟥 NOR como compuerta universal
 
-NOR también permite construir:
+NOR también es una compuerta universal.
+
+Con NOR podemos construir:
 
 ```text
 NOT
@@ -628,7 +912,7 @@ OR
 
 ---
 
-## NOT con NOR
+## NOT utilizando NOR
 
 ```text
 (A+A)' = A'
@@ -636,7 +920,7 @@ OR
 
 ---
 
-## OR con NOR
+## OR utilizando NOR
 
 Primero:
 
@@ -644,7 +928,7 @@ Primero:
 X = (A+B)'
 ```
 
-Después:
+Después invertimos:
 
 ```text
 A+B = (X+X)'
@@ -652,9 +936,9 @@ A+B = (X+X)'
 
 ---
 
-## AND con NOR
+## AND utilizando NOR
 
-Utilizando De Morgan:
+Por De Morgan:
 
 ```text
 AB = (A'+B')'
@@ -662,12 +946,20 @@ AB = (A'+B')'
 
 ---
 
-## Estructura NOR-NOR
+## Implementación NOR-NOR
 
-Una expresión POS puede adaptarse de forma natural a:
+Las expresiones:
 
 ```text
-NOR → NOR
+POS
+```
+
+pueden adaptarse naturalmente a una estructura:
+
+```text
+NOR
+ ↓
+NOR
 ```
 
 ---
@@ -676,52 +968,135 @@ NOR → NOR
 
 # 13. 💰 Costo de implementación
 
-La expresión algebraicamente más corta no siempre produce necesariamente la
+Una expresión algebraicamente pequeña no necesariamente representa siempre la
 implementación física más económica.
 
-Conviene analizar:
+También deben analizarse factores como:
 
 - número de literales;
 - cantidad de compuertas;
-- entradas utilizadas;
-- número de circuitos integrados;
-- familia lógica disponible.
-
-Por ejemplo, si ya se dispone de circuitos `74LS00`, una solución NAND puede
-ser preferible incluso frente a otra expresión aparentemente más pequeña.
+- número de entradas;
+- circuitos integrados necesarios;
+- familia lógica disponible;
+- cableado;
+- complejidad física.
 
 ---
 
-# 🧠 Proceso completo de la Semana 3
+## Ejemplo conceptual
+
+Supongamos que una función puede implementarse utilizando:
+
+```text
+AND + OR + NOT
+```
+
+pero también utilizando únicamente:
+
+```text
+NAND
+```
+
+Si ya tenemos disponible un integrado:
+
+```text
+74LS00
+```
+
+que contiene compuertas NAND, podría resultar más conveniente utilizar una
+implementación NAND.
+
+---
+
+<a id="procedimiento"></a>
+
+# 14. 🛠️ Procedimiento completo de simplificación
 
 ```mermaid
 flowchart TD
+
     A["Tabla de verdad"]
     A --> B["SOP / POS canónica"]
+
     B --> C["Mapa de Karnaugh"]
-    C --> D["Agrupaciones"]
-    D --> E["Función mínima"]
-    E --> F["Elegir implementación"]
-    F --> G["NAND-NAND"]
-    F --> H["NOR-NOR"]
-    G --> I["Circuito"]
-    H --> I
+
+    C --> D["Colocar 0, 1 y X"]
+
+    D --> E["Formar grupos 2ᵏ"]
+
+    E --> F["Identificar variables constantes"]
+
+    F --> G["Obtener función mínima"]
+
+    G --> H["Elegir implementación"]
+
+    H --> I["AND / OR"]
+    H --> J["NAND-NAND"]
+    H --> K["NOR-NOR"]
+
+    I --> L["Circuito final"]
+    J --> L
+    K --> L
 ```
+
+---
+
+# 🧠 Estrategia rápida para resolver Karnaugh
+
+Cuando tengas un ejercicio:
+
+### Paso 1
+
+Construye correctamente el mapa usando:
+
+```text
+00 01 11 10
+```
+
+### Paso 2
+
+Coloca los valores:
+
+```text
+0
+1
+X
+```
+
+### Paso 3
+
+Forma primero los grupos más grandes posibles.
+
+### Paso 4
+
+Busca implicantes primos esenciales.
+
+### Paso 5
+
+Comprueba que todos los valores necesarios estén cubiertos.
+
+### Paso 6
+
+Lee únicamente las variables que permanecen constantes.
 
 ---
 
 <a id="sintesis"></a>
 
-# 14. ✅ Síntesis de la Semana 3
+# 15. ✅ Síntesis de la Semana 3
 
-| Concepto | Regla |
+| Concepto | Regla principal |
 |---|---|
 | Código Gray | `00, 01, 11, 10` |
+| Adyacencia | Entre vecinos cambia una variable |
 | Tamaño de grupo | `2ᵏ` |
 | SOP | Agrupar `1` |
 | POS | Agrupar `0` |
 | Bordes | Son adyacentes |
-| X | Se utiliza solo cuando ayuda |
+| Esquinas | También son vecinas |
+| X | Se utiliza solamente cuando ayuda |
+| Implicante primo | Grupo que no puede ampliarse |
+| Implicante esencial | Debe incluirse |
 | NAND | Compuerta universal |
 | NOR | Compuerta universal |
 | SOP → hardware | NAND-NAND |
@@ -729,10 +1104,36 @@ flowchart TD
 
 ---
 
-### Idea fundamental
+# 🔗 Conexión con la Semana 4
 
-> El mapa de Karnaugh no cambia la función lógica. Solamente encuentra una
-> representación más sencilla del mismo comportamiento.
+Hasta este momento hemos aprendido a:
+
+```text
+crear funciones
+```
+
+y:
+
+```text
+simplificarlas
+```
+
+La siguiente pregunta es:
+
+> ¿Podemos utilizar estas mismas herramientas para construir circuitos que
+> realicen operaciones matemáticas?
+
+La respuesta es:
+
+```text
+SÍ
+```
+
+Y comenzaremos con:
+
+```text
+SUMADORES BINARIOS
+```
 
 ---
 
@@ -744,7 +1145,7 @@ flowchart TD
 
 <div align="center">
 
-**Fin de la Semana 3**
+### 🟠 Fin de la Semana 3
 
 [⬆️ Volver al contenido](#contenido)
 
