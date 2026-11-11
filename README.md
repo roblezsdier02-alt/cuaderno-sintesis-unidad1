@@ -715,7 +715,36 @@ Ejemplos resueltos
 ➡️ [Ejemplos Resueltos](ejemplos-resueltos/README.md)
 
 ---
+---
 
+# 🤖 Declaración de uso de Inteligencia Artificial
+
+Para la elaboración de este **Cuaderno Digital de Síntesis de la Unidad 1** se utilizó
+Inteligencia Artificial como herramienta de apoyo durante el proceso de organización,
+estructuración y presentación del contenido.
+
+Su utilización estuvo orientada principalmente a:
+
+- organizar los contenidos estudiados durante las cuatro semanas de la Unidad 1;
+- mejorar la estructura y presentación del material en formato Markdown;
+- apoyar la elaboración de diagramas e ilustraciones en formato SVG y Mermaid;
+- mejorar la claridad y organización de algunas explicaciones;
+- apoyar la construcción de ejemplos y representaciones visuales relacionadas con los temas estudiados.
+
+La información académica utilizada como base corresponde a los contenidos trabajados
+en la asignatura **Diseño de Circuitos**, incluyendo los temas de sistemas numéricos,
+compuertas lógicas, álgebra de Boole, formas canónicas, mapas de Karnaugh y circuitos
+aritméticos.
+
+La Inteligencia Artificial fue empleada como **herramienta de apoyo** y no como sustituto
+del proceso de aprendizaje. El contenido fue organizado y revisado con el propósito de
+mantener coherencia con los temas desarrollados durante la Unidad 1.
+
+> **Herramienta utilizada:** ChatGPT de OpenAI  
+> **Uso:** apoyo en organización, redacción, estructuración, generación de código Markdown,
+> diagramas y recursos visuales para el cuaderno digital.
+
+---
 # ✅ Conclusión
 
 Durante la Unidad 1 se desarrolló progresivamente el proceso necesario para
