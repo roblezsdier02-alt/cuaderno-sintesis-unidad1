@@ -15,10 +15,9 @@
 
 ---
 
-| ⬅️ Anterior | 🏠 Inicio | ➡️ Continuar |
+| ⬅️ Anterior | 🏠 Inicio | 📚 Volver al contenido |
 |:---:|:---:|:---:|
-| [**Resumen de la Unidad**](../resumen-unidad/README.md) | [**Índice general**](../README.md) | [**Autoevaluación**](../autoevaluacion/README.md) |
-
+| [**Resumen de la Unidad**](../resumen-unidad/README.md) | [**Índice general**](../README.md) | [**Semana 1**](../semana-1/README.md) |
 ---
 
 <a id="contenido"></a>
