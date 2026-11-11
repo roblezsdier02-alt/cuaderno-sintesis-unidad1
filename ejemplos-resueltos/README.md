@@ -1674,13 +1674,23 @@ flowchart TD
 
 ---
 
-# ✅ Antes de continuar
+#  Después de estudiar los ejemplos
 
-Si puedes resolver nuevamente los ejemplos anteriores sin abrir las soluciones,
-ya tienes una base sólida para realizar una autoevaluación.
+Si puedes resolver nuevamente los ejercicios anteriores sin abrir las
+soluciones, significa que ya comprendes una parte importante de los contenidos
+de la Unidad 1.
 
-La siguiente sección eliminará las soluciones visibles inicialmente y te
-permitirá comprobar cuánto recuerdas realmente.
+Si encuentras dificultades en algún ejercicio, utiliza la navegación del
+cuaderno para volver directamente al tema correspondiente:
+
+- 🟢 [**Repasar Semana 1**](../semana-1/README.md)
+- 🔵 [**Repasar Semana 2**](../semana-2/README.md)
+- 🟠 [**Repasar Semana 3**](../semana-3/README.md)
+- 🔴 [**Repasar Semana 4**](../semana-4/README.md)
+- 📚 [**Consultar Resumen de la Unidad**](../resumen-unidad/README.md)
+
+La finalidad de estos ejemplos es relacionar la teoría con procedimientos
+concretos de resolución y facilitar la consulta de los temas más importantes.
 
 ---
 
@@ -1692,7 +1702,7 @@ permitirá comprobar cuánto recuerdas realmente.
 
 <div align="center">
 
-# 🧩 EJEMPLOS COMPLETADOS
+#  EJEMPLOS COMPLETADOS
 
 ### Unidad 1 · Diseño de Circuitos
 
