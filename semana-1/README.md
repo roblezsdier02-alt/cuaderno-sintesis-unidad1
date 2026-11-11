@@ -30,7 +30,21 @@
 8. [Código ASCII](#ascii)
 9. [Compuertas lógicas](#compuertas)
 10. [Tabla comparativa](#comparacion)
-11. [Síntesis](#sintesis)
+11. [Síntesis de la semana](#sintesis)
+
+---
+
+# 🎯 Objetivo de la Semana 1
+
+Comprender cómo los sistemas digitales representan información mediante dos
+estados lógicos, aprender a convertir números entre diferentes sistemas de
+numeración, representar números negativos mediante complemento a dos,
+reconocer códigos digitales y comprender el funcionamiento de las principales
+compuertas lógicas.
+
+<p align="center">
+  <img src="../assets/sistemas-codigos.svg" width="100%" alt="Sistemas numéricos y códigos digitales">
+</p>
 
 ---
 
@@ -38,15 +52,20 @@
 
 # 1. 💻 Representación digital
 
-Los computadores trabajan internamente con señales que pueden interpretarse
-mediante dos estados lógicos:
+Los sistemas digitales trabajan principalmente utilizando dos estados:
 
 ```text
 0
 1
 ```
 
-De forma conceptual:
+Estos estados reciben el nombre de:
+
+```text
+niveles lógicos
+```
+
+Conceptualmente pueden interpretarse como:
 
 ```mermaid
 flowchart LR
@@ -54,22 +73,33 @@ flowchart LR
     C["1 lógico"] --> D["Estado alto"]
 ```
 
-Un transistor puede comportarse como un interruptor controlado por voltaje.
+En electrónica digital, un transistor puede funcionar como un interruptor
+controlado mediante voltaje.
 
-Por esta razón, utilizar dos estados claramente diferenciados permite construir
-sistemas digitales confiables.
+De forma simplificada:
+
+```text
+0 → interruptor abierto
+1 → interruptor cerrado
+```
+
+El uso de solamente dos estados facilita la construcción de sistemas digitales
+capaces de diferenciar correctamente las señales incluso cuando existe cierto
+nivel de ruido eléctrico.
 
 ---
 
-## Bit y byte
+## 🔹 Bit
 
-Un **bit** es un dígito binario.
+Un **bit** es la unidad mínima de información digital.
+
+La palabra proviene de:
 
 ```text
-bit = binary digit
+Binary Digit
 ```
 
-Puede almacenar:
+Un bit solamente puede almacenar:
 
 ```text
 0
@@ -81,7 +111,11 @@ o:
 1
 ```
 
-Un **byte** está formado por:
+---
+
+## 🔹 Byte
+
+Un byte está formado por:
 
 ```text
 8 bits
@@ -93,18 +127,31 @@ Ejemplo:
 01000001
 ```
 
+Un conjunto de bits puede representar:
+
+- números;
+- letras;
+- instrucciones;
+- imágenes;
+- sonidos;
+- información de control.
+
+---
+
+[⬆️ Volver al contenido](#contenido)
+
 ---
 
 <a id="niveles"></a>
 
 # 2. ⚡ Niveles lógicos
 
-Es importante comprender que un `0` y un `1` no necesariamente representan
-un único valor exacto de voltaje.
+Un concepto importante es que un `0` o un `1` lógico no representa
+necesariamente un único voltaje exacto.
 
-Representan **rangos**.
+Representa un **rango de voltajes**.
 
-Para la familia TTL 74LS estudiada:
+En la familia lógica TTL 74LS estudiada:
 
 | Situación | Nivel aproximado |
 |---|---:|
@@ -114,20 +161,45 @@ Para la familia TTL 74LS estudiada:
 | Una entrada reconoce `1` | ≥ 2,0 V |
 | Una salida garantiza `1` | ≥ 2,7 V |
 
-La región intermedia es problemática:
+---
+
+## ⚠️ Zona indefinida
+
+Entre:
 
 ```text
-0,8 V < señal < 2,0 V
+0,8 V
 ```
 
-porque el circuito no garantiza interpretar correctamente un `0` o un `1`.
+y:
+
+```text
+2,0 V
+```
+
+el circuito no garantiza una interpretación correcta.
+
+Una señal situada en esta región podría ser interpretada como:
+
+```text
+0
+```
+
+o:
+
+```text
+1
+```
+
+Por esta razón deben evitarse las entradas sin conectar y las señales
+eléctricamente inestables.
 
 ---
 
-## Margen de ruido
+## 🛡️ Margen de ruido
 
-Existe una separación entre lo que una compuerta garantiza a su salida y lo que
-la siguiente exige en su entrada.
+El margen de ruido representa una especie de zona de seguridad frente a
+pequeñas alteraciones eléctricas.
 
 ### Margen alto
 
@@ -135,13 +207,29 @@ la siguiente exige en su entrada.
 2,7 V - 2,0 V = 0,7 V
 ```
 
+Esto significa que una señal alta puede perder aproximadamente:
+
+```text
+0,7 V
+```
+
+y todavía ser reconocida correctamente como `1`.
+
+---
+
 ### Margen bajo
 
 ```text
 0,8 V - 0,5 V = 0,3 V
 ```
 
-Esta diferencia proporciona tolerancia frente al ruido eléctrico.
+Una señal baja puede aumentar aproximadamente:
+
+```text
+0,3 V
+```
+
+y todavía ser reconocida correctamente como `0`.
 
 ---
 
@@ -153,77 +241,90 @@ Esta diferencia proporciona tolerancia frente al ruido eléctrico.
 
 # 3. 🔢 Sistemas numéricos
 
-Un **sistema posicional** asigna a cada cifra un valor que depende de:
+Un sistema numérico posicional asigna valor a cada cifra dependiendo de:
 
-1. el símbolo;
+1. el símbolo utilizado;
 2. la posición;
-3. la base.
-
-Ejemplo decimal:
-
-```text
-555
-
-= 5×10² + 5×10¹ + 5×10⁰
-
-= 500 + 50 + 5
-```
+3. la base del sistema.
 
 ---
 
-## Sistema decimal
+## 🔟 Sistema decimal
 
-Base:
+El sistema decimal utiliza:
 
 ```text
-10
+Base 10
 ```
 
-Símbolos:
+Sus símbolos son:
 
 ```text
 0 1 2 3 4 5 6 7 8 9
 ```
 
+Ejemplo:
+
+```text
+555
+```
+
+se puede desarrollar como:
+
+```text
+5×10² + 5×10¹ + 5×10⁰
+```
+
+Entonces:
+
+```text
+500 + 50 + 5 = 555
+```
+
 ---
 
-## Sistema binario
+## 0️⃣1️⃣ Sistema binario
 
-Base:
-
-```text
-2
-```
-
-Símbolos:
+El sistema binario utiliza:
 
 ```text
-0 1
+Base 2
 ```
 
-Cada posición representa una potencia de 2.
+Sus únicos símbolos son:
+
+```text
+0
+1
+```
+
+Cada posición corresponde a una potencia de 2.
 
 | Potencia | 2⁷ | 2⁶ | 2⁵ | 2⁴ | 2³ | 2² | 2¹ | 2⁰ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | Valor | 128 | 64 | 32 | 16 | 8 | 4 | 2 | 1 |
 
-Ejemplo:
+---
+
+### Ejemplo
 
 ```text
 1011₂
 ```
 
-Desarrollo:
+Se desarrolla como:
 
 ```text
 1×2³ + 0×2² + 1×2¹ + 1×2⁰
 ```
 
+Por tanto:
+
 ```text
 8 + 0 + 2 + 1 = 11
 ```
 
-Por tanto:
+Entonces:
 
 ```text
 1011₂ = 11₁₀
@@ -231,21 +332,21 @@ Por tanto:
 
 ---
 
-## Sistema octal
+## 8️⃣ Sistema octal
 
-Base:
+El sistema octal utiliza:
 
 ```text
-8
+Base 8
 ```
 
-Símbolos:
+Sus símbolos son:
 
 ```text
 0 1 2 3 4 5 6 7
 ```
 
-Cada dígito octal equivale a:
+Cada dígito octal puede representar:
 
 ```text
 3 bits
@@ -257,7 +358,7 @@ Ejemplo:
 111 010 101
 ```
 
-se agrupa:
+Separamos:
 
 ```text
 111 = 7
@@ -273,19 +374,21 @@ Entonces:
 
 ---
 
-## Sistema hexadecimal
+## 1️⃣6️⃣ Sistema hexadecimal
 
-Base:
+El sistema hexadecimal utiliza:
 
 ```text
-16
+Base 16
 ```
 
-Símbolos:
+Sus símbolos son:
 
 ```text
 0 1 2 3 4 5 6 7 8 9 A B C D E F
 ```
+
+Correspondencia:
 
 | Hexadecimal | Decimal |
 |:---:|---:|
@@ -296,7 +399,7 @@ Símbolos:
 | E | 14 |
 | F | 15 |
 
-Cada dígito hexadecimal equivale a:
+Cada dígito hexadecimal representa:
 
 ```text
 4 bits
@@ -307,6 +410,8 @@ Ejemplo:
 ```text
 1010 1111
 ```
+
+Tenemos:
 
 ```text
 1010 = A
@@ -321,6 +426,10 @@ Entonces:
 
 ---
 
+[⬆️ Volver al contenido](#contenido)
+
+---
+
 <a id="conversiones"></a>
 
 # 4. 🔄 Conversión entre bases
@@ -331,6 +440,14 @@ Se realizan divisiones sucesivas para 2.
 
 Ejemplo:
 
+Convertir:
+
+```text
+13₁₀
+```
+
+a binario.
+
 ```text
 13 ÷ 2 = 6    residuo 1
  6 ÷ 2 = 3    residuo 0
@@ -338,7 +455,13 @@ Ejemplo:
  1 ÷ 2 = 0    residuo 1
 ```
 
-Se leen los residuos de abajo hacia arriba:
+Se leen los residuos desde abajo hacia arriba:
+
+```text
+1101
+```
+
+Por tanto:
 
 ```text
 13₁₀ = 1101₂
@@ -354,15 +477,19 @@ Ejemplo:
 1101₂
 ```
 
+Se utilizan las potencias de 2:
+
 ```text
 1×8 + 1×4 + 0×2 + 1×1
 ```
+
+Entonces:
 
 ```text
 8 + 4 + 0 + 1 = 13
 ```
 
-Entonces:
+Por tanto:
 
 ```text
 1101₂ = 13₁₀
@@ -372,29 +499,49 @@ Entonces:
 
 ## Binario ↔ Octal
 
-Agrupar de:
+Para convertir rápidamente entre binario y octal se agrupan los bits:
 
 ```text
-3 en 3 bits
+de 3 en 3
 ```
 
 desde la derecha.
+
+Ejemplo:
+
+```text
+111 010 101
+```
+
+produce:
+
+```text
+7 2 5
+```
 
 ---
 
 ## Binario ↔ Hexadecimal
 
-Agrupar de:
+Para convertir entre binario y hexadecimal se agrupan:
 
 ```text
-4 en 4 bits
+4 bits
 ```
 
 desde la derecha.
 
----
+Ejemplo:
 
-[⬆️ Volver al contenido](#contenido)
+```text
+1010 1111
+```
+
+produce:
+
+```text
+A F
+```
 
 ---
 
@@ -402,29 +549,29 @@ desde la derecha.
 
 # 5. ➖ Complemento a dos
 
-El complemento a dos permite representar números negativos y realizar restas
-utilizando circuitos sumadores.
+El complemento a dos permite representar números negativos en sistemas
+digitales.
 
-Para obtener el negativo de un número:
+El procedimiento general es:
 
 ```mermaid
 flowchart LR
-    A["Número binario"] --> B["Invertir bits"]
+    A["Número binario"] --> B["Invertir todos los bits"]
     B --> C["Sumar 1"]
     C --> D["Complemento a dos"]
 ```
 
 ---
 
-## Ejemplo: representar -5 en 4 bits
+## Ejemplo: representar -5
 
-Número positivo:
+En 4 bits:
 
 ```text
 5 = 0101
 ```
 
-Invertimos:
+Primero invertimos todos los bits:
 
 ```text
 0101
@@ -432,7 +579,11 @@ Invertimos:
 1010
 ```
 
-Sumamos uno:
+Después sumamos:
+
+```text
+1
+```
 
 ```text
   1010
@@ -441,7 +592,7 @@ Sumamos uno:
   1011
 ```
 
-Por tanto:
+Entonces:
 
 ```text
 -5 = 1011
@@ -451,13 +602,18 @@ en complemento a dos de 4 bits.
 
 ---
 
-## Regla fundamental
+## Regla general
 
 ```text
 -N = invertir N + 1
 ```
 
-Esto será importante nuevamente durante la Semana 4.
+Este procedimiento será utilizado nuevamente durante la Semana 4 para construir
+un circuito capaz de realizar restas.
+
+---
+
+[⬆️ Volver al contenido](#contenido)
 
 ---
 
@@ -471,7 +627,11 @@ BCD significa:
 Binary Coded Decimal
 ```
 
-Cada **dígito decimal** se representa independientemente mediante 4 bits.
+En BCD cada dígito decimal se representa independientemente mediante:
+
+```text
+4 bits
+```
 
 | Decimal | BCD |
 |:---:|:---:|
@@ -497,30 +657,45 @@ Las combinaciones:
 1111
 ```
 
-no corresponden a ningún dígito decimal BCD.
-
-Esta característica será importante al trabajar posteriormente con
-**condiciones indiferentes**.
+no representan ningún dígito BCD válido.
 
 ---
 
-## BCD no es lo mismo que binario natural
+## Ejemplo
 
-Por ejemplo, el número decimal:
+El número:
 
 ```text
 157
 ```
 
-en BCD se representa dígito por dígito:
+en BCD se representa dígito por dígito.
 
 ```text
-1    5    7
-
-0001 0101 0111
+1 → 0001
+5 → 0101
+7 → 0111
 ```
 
-Esto es diferente de convertir `157` directamente a binario.
+Entonces:
+
+```text
+157₁₀ → 0001 0101 0111 BCD
+```
+
+---
+
+## ⚠️ BCD no es binario natural
+
+Representar `157` mediante BCD no es lo mismo que convertir directamente:
+
+```text
+157₁₀
+```
+
+a binario.
+
+BCD codifica cada cifra decimal por separado.
 
 ---
 
@@ -528,7 +703,7 @@ Esto es diferente de convertir `157` directamente a binario.
 
 # 7. 🔁 Código Gray
 
-El código Gray posee una característica especial:
+El código Gray posee una característica importante:
 
 > Entre dos valores consecutivos cambia solamente un bit.
 
@@ -549,25 +724,42 @@ flowchart LR
     D --> A
 ```
 
-Esto disminuye la posibilidad de lecturas incorrectas durante una transición.
+---
+
+## ¿Por qué es útil?
+
+En binario normal, por ejemplo:
+
+```text
+3 = 011
+4 = 100
+```
+
+cambian tres bits al mismo tiempo.
+
+Durante una transición física podría producirse temporalmente una lectura
+incorrecta.
+
+Con Gray solamente cambia un bit entre estados vecinos.
 
 ---
 
-## Aplicación
+## Aplicaciones
 
-Puede utilizarse en:
+El código Gray puede utilizarse en:
 
-- encoders;
+- encoders rotativos;
 - sensores de posición;
-- sistemas donde varias señales no deberían cambiar simultáneamente.
+- dispositivos donde deben evitarse transiciones ambiguas;
+- mapas de Karnaugh.
 
-El mismo orden:
+El orden:
 
 ```text
 00 → 01 → 11 → 10
 ```
 
-aparecerá nuevamente en los **mapas de Karnaugh**.
+será fundamental durante la Semana 3.
 
 ---
 
@@ -575,9 +767,9 @@ aparecerá nuevamente en los **mapas de Karnaugh**.
 
 # 8. 🔤 Código ASCII
 
-ASCII establece una correspondencia entre caracteres y valores numéricos.
+ASCII permite representar caracteres mediante números.
 
-Ejemplo:
+Algunos ejemplos:
 
 | Carácter | Decimal | Hexadecimal |
 |:---:|---:|:---:|
@@ -586,13 +778,13 @@ Ejemplo:
 | L | 76 | 4C |
 | O | 79 | 4F |
 
-Por tanto:
+Por ejemplo:
 
 ```text
-A = 65₁₀
+A = 65
 ```
 
-Una computadora no almacena directamente una letra dibujada, sino un valor
+Una computadora no almacena directamente la letra dibujada, sino el valor
 numérico asociado a ella.
 
 ---
@@ -604,6 +796,9 @@ numérico asociado a ella.
 <a id="compuertas"></a>
 
 # 9. 🚪 Compuertas lógicas
+
+Las compuertas lógicas son los bloques fundamentales utilizados para construir
+circuitos digitales.
 
 Las siete compuertas estudiadas son:
 
@@ -617,11 +812,15 @@ XOR
 XNOR
 ```
 
+<p align="center">
+  <img src="../assets/compuertas-logicas.svg" width="100%" alt="Las siete compuertas lógicas">
+</p>
+
 ---
 
-## NOT
+## 🔺 NOT
 
-Invierte una señal.
+La compuerta NOT invierte la entrada.
 
 ```text
 Y = A'
@@ -635,14 +834,14 @@ Y = A'
 ```mermaid
 flowchart LR
     A["A"] --> B["NOT"]
-    B --> Y["Y = A'"]
+    B --> Y["Y"]
 ```
 
 ---
 
-## AND
+## 🔵 AND
 
-La salida es `1` únicamente cuando **todas** las entradas son `1`.
+La salida vale `1` solamente cuando todas las entradas valen `1`.
 
 ```text
 Y = A·B
@@ -655,7 +854,7 @@ Y = A·B
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |
 
-Idea:
+Palabra clave:
 
 ```text
 TODAS
@@ -663,9 +862,9 @@ TODAS
 
 ---
 
-## OR
+## 🟡 OR
 
-La salida es `1` cuando **al menos una** entrada es `1`.
+La salida vale `1` cuando al menos una entrada vale `1`.
 
 ```text
 Y = A+B
@@ -678,7 +877,7 @@ Y = A+B
 | 1 | 0 | 1 |
 | 1 | 1 | 1 |
 
-Idea:
+Palabra clave:
 
 ```text
 AL MENOS UNA
@@ -686,9 +885,9 @@ AL MENOS UNA
 
 ---
 
-## NAND
+## 🟠 NAND
 
-Es la negación de AND.
+NAND es la negación de AND.
 
 ```text
 Y = (A·B)'
@@ -703,9 +902,9 @@ Y = (A·B)'
 
 ---
 
-## NOR
+## 🔴 NOR
 
-Es la negación de OR.
+NOR es la negación de OR.
 
 ```text
 Y = (A+B)'
@@ -720,9 +919,9 @@ Y = (A+B)'
 
 ---
 
-## XOR
+## 🟣 XOR
 
-La salida es `1` cuando las entradas son diferentes.
+La salida vale `1` cuando las entradas son diferentes.
 
 ```text
 Y = A ⊕ B
@@ -735,7 +934,7 @@ Y = A ⊕ B
 | 1 | 0 | 1 |
 | 1 | 1 | 0 |
 
-Idea:
+Palabra clave:
 
 ```text
 DIFERENTES
@@ -743,9 +942,9 @@ DIFERENTES
 
 ---
 
-## XNOR
+## 🟤 XNOR
 
-La salida es `1` cuando las entradas son iguales.
+La salida vale `1` cuando las entradas son iguales.
 
 ```text
 Y = (A ⊕ B)'
@@ -758,7 +957,7 @@ Y = (A ⊕ B)'
 | 1 | 0 | 0 |
 | 1 | 1 | 1 |
 
-Idea:
+Palabra clave:
 
 ```text
 IGUALES
@@ -768,32 +967,37 @@ IGUALES
 
 <a id="comparacion"></a>
 
-# 10. 📊 Tabla comparativa
+# 10. 📊 Tabla comparativa de compuertas
 
-| Compuerta | Expresión | ¿Cuándo vale 1? |
+| Compuerta | Expresión | Resultado `1` cuando... |
 |---|---|---|
-| NOT | `A'` | Cuando A = 0 |
-| AND | `A·B` | Cuando todas son 1 |
-| OR | `A+B` | Cuando al menos una es 1 |
-| NAND | `(A·B)'` | Excepto cuando todas son 1 |
-| NOR | `(A+B)'` | Solo cuando todas son 0 |
-| XOR | `A⊕B` | Cuando son diferentes |
-| XNOR | `(A⊕B)'` | Cuando son iguales |
+| NOT | `A'` | A vale 0 |
+| AND | `A·B` | Todas las entradas son 1 |
+| OR | `A+B` | Al menos una entrada es 1 |
+| NAND | `(A·B)'` | No todas las entradas son 1 |
+| NOR | `(A+B)'` | Todas las entradas son 0 |
+| XOR | `A⊕B` | Las entradas son diferentes |
+| XNOR | `(A⊕B)'` | Las entradas son iguales |
 
 ---
 
 # 🧠 Ejemplo integrado
 
-Para:
+Consideremos:
 
 ```text
 Y = A·B + C'
 ```
 
-primero se resuelven las operaciones intermedias.
+El circuito debe realizar:
+
+1. una AND entre `A` y `B`;
+2. una NOT sobre `C`;
+3. una OR entre ambos resultados.
 
 ```mermaid
 flowchart LR
+
     A["A"] --> G1["AND"]
     B["B"] --> G1
 
@@ -805,7 +1009,7 @@ flowchart LR
     G3 --> Y["Y"]
 ```
 
-La prioridad es:
+El orden de evaluación es:
 
 ```text
 NOT → AND → OR
@@ -819,7 +1023,9 @@ NOT → AND → OR
 
 ```mermaid
 flowchart TD
+
     A["Representación digital"]
+
     A --> B["0 y 1"]
     A --> C["Sistemas numéricos"]
     A --> D["Códigos"]
@@ -838,17 +1044,39 @@ flowchart TD
     E --> N["XOR · XNOR"]
 ```
 
-### Ideas que deben quedar claras
+---
 
-- `0` y `1` representan estados lógicos.
-- El sistema binario utiliza potencias de 2.
-- Octal agrupa bits de 3 en 3.
-- Hexadecimal agrupa bits de 4 en 4.
-- El complemento a dos permite representar números negativos.
-- BCD representa cada dígito decimal por separado.
-- Gray cambia un solo bit entre posiciones consecutivas.
-- ASCII relaciona caracteres con números.
-- Las compuertas constituyen los bloques básicos de los circuitos digitales.
+## 📌 Ideas fundamentales
+
+Al finalizar esta semana debemos recordar:
+
+- un sistema digital trabaja con estados lógicos `0` y `1`;
+- esos estados representan rangos de voltaje;
+- el sistema binario utiliza potencias de 2;
+- octal agrupa bits de 3 en 3;
+- hexadecimal agrupa bits de 4 en 4;
+- el complemento a dos permite representar números negativos;
+- BCD representa cada dígito decimal de manera independiente;
+- Gray cambia un solo bit entre valores consecutivos;
+- ASCII relaciona caracteres con valores numéricos;
+- las compuertas lógicas constituyen la base de los circuitos digitales.
+
+---
+
+# 🔗 Conexión con la siguiente semana
+
+Durante esta semana aprendimos qué hacen las compuertas.
+
+La siguiente pregunta será:
+
+> ¿Cómo podemos representar matemáticamente un circuito construido con estas
+> compuertas?
+
+La respuesta será:
+
+```text
+ÁLGEBRA DE BOOLE
+```
 
 ---
 
@@ -860,7 +1088,7 @@ flowchart TD
 
 <div align="center">
 
-**Fin de la Semana 1**
+### 🟢 Fin de la Semana 1
 
 [⬆️ Volver al contenido](#contenido)
 
