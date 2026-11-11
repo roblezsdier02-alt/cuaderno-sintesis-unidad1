@@ -1,4 +1,3 @@
-````markdown
 <div align="center">
 
 <img src="./assets/logo-unl.png" alt="Universidad Nacional de Loja" width="210">
@@ -763,4 +762,3 @@ VERIFICAR
 [⬆️ Volver al índice](#indice)
 
 </div>
-````
